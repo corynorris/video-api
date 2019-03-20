@@ -11,29 +11,17 @@ defmodule VideoApiWeb.Router do
     plug :put_secure_browser_headers
   end
 
-  pipeline :api do
-    plug :accepts, ["json"]
-  end
-
   pipeline :auth do
     plug Guardian.AuthPipeline
   end
 
   scope "/", VideoApiWeb do
-    pipe_through [:browser]
+    pipe_through [:browser, :auth]
 
     get "/", PageController, :index
 
-    resources "/users", UserController, [:create, :show]
-  end
-
-  scope "/" do
-    pipe_through [:auth]
+    get "sign_up", UserController, :new
+    # resources "/users", UserController, [:create, :show]
     resources "/videos", VideoController
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", VideoApiWeb do
-  #   pipe_through :api
-  # end
 end

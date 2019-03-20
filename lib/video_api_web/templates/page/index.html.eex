@@ -1,35 +1,80 @@
-<section class="phx-hero">
-  <h1><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h1>
-  <p>A productive web framework that<br/>does not compromise speed and maintainability.</p>
+<section class="hero is-medium is-primary" style="background: #7851a9">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title">
+        Video API
+      </h1>
+      <h2 class="subtitle">
+        A self-hosted video transcoding service built with Elixir and powered by the powerful FFMPEG.
+      </h2>
+    </div>
+  </div>
 </section>
 
-<section class="row">
-  <article class="column">
-    <h2>Resources</h2>
-    <ul>
-      <li>
-        <a href="https://hexdocs.pm/phoenix/overview.html">Guides &amp; Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix/blob/v1.4/CHANGELOG.md">v1.4 Changelog</a>
-      </li>
-    </ul>
-  </article>
-  <article class="column">
-    <h2>Help</h2>
-    <ul>
-      <li>
-        <a href="https://elixirforum.com/c/phoenix-forum">Forum</a>
-      </li>
-      <li>
-        <a href="https://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on Freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">Twitter @elixirphoenix</a>
-      </li>
-    </ul>
-  </article>
+<div class="box cta">
+  <p class="has-text-centered">
+    <span class="tag is-primary">New</span> Now supports four formats: 1080p, 720p, 480p and 360p.
+  </p>
+</div>
+<section class="container">
+  <div class="columns features">
+    <div class="column is-4">
+      <div class="card is-shady">
+        <div class="card-image has-text-centered">
+          <i class="fa fa-apple"></i>
+        </div>
+        <div class="card-content">
+          <div class="content">
+            <h4>Targets HLS</h4>
+            <p>
+              HLS is the industry standard created by apple and used by major video publishers such as Twitch and
+              Youtube among others.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="column is-4">
+      <div class="card is-shady">
+        <div class="card-image has-text-centered">
+          <i class="fa fa-empire"></i>
+        </div>
+        <div class="card-content">
+          <div class="content">
+            <h4>FFMPEG under the hood</h4>
+            <p> Uses the battle tested <a href="https://ffmpeg.org/">FFMPEG</a> wrapped in an elixir flow to give
+              high-performance output with only free flags enabled. This enables high-throughput, completely open
+              source video transcoding.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="column is-4">
+      <div class="card is-shady">
+        <div class="card-image has-text-centered">
+          <i class="fa fa-apple"></i>
+        </div>
+        <div class="card-content">
+          <div class="content">
+            <h4>Dynamic Quality</h4>
+            <p>
+              Thanks to the power of HLS, dynamic quality adjustment to video can be made on the fly, similar to how any
+              other professional video host manages video quality.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="intro column is-8 is-offset-2">
+    <h1 class="title">Four quality formats</h1>
+    <p class="subtitle">
+      In order to ensure a smooth viewing experience regardless of the device or connection that the video is
+      being viewed on, this service transcodes video into the four main formats used by most production
+      websites, 1080p, 720p, 480p and 360p.
+    </p>
+  </div>
 </section>
