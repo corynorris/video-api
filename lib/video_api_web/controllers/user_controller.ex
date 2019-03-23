@@ -27,7 +27,10 @@ defmodule VideoApiWeb.UserController do
   end
 
   def show(conn, %{"id" => id}) do
-    user = Accounts.get_user!(id)
+    user =
+      Accounts.get_user!(id)
+      |> Map.delete(:password)
+
     render(conn, "show.html", user: user)
   end
 

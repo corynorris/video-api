@@ -1,4 +1,4 @@
-defmodule VideoApiWeb.Guardian.EnforceAuthPipeline do
+defmodule VideoApiWeb.Guardian.LoadSessionPipeline do
   use Guardian.Plug.Pipeline,
     otp_app: :video_api,
     module: VideoApiWeb.Guardian,
@@ -6,6 +6,7 @@ defmodule VideoApiWeb.Guardian.EnforceAuthPipeline do
 
   plug Guardian.Plug.VerifySession, claims: %{"typ" => "access"}
   plug Guardian.Plug.VerifyHeader, claims: %{"typ" => "access"}
-  plug Guardian.Plug.EnsureAuthenticated
-  plug Guardian.Plug.LoadResource
+  plug Guardian.Plug.LoadResource, allow_blank: true
+
+  IO.puts("Loaded session")
 end

@@ -40,6 +40,8 @@ defmodule VideoApiWeb do
       use Phoenix.HTML
 
       import VideoApiWeb.ErrorHelpers
+      # Let's add this one
+      import VideoApiWeb.InputHelpers
       import VideoApiWeb.Gettext
       alias VideoApiWeb.Router.Helpers, as: Routes
     end

@@ -2,8 +2,8 @@
     <div class="container">
         <div class="columns ">
             <div class="column is-half is-offset-one-quarter">
-                <h1 class="title">Edit Profile</h1>
-                <%= render "form.html", Map.put(assigns, :action, Routes.user_path(@conn, :update, @user)) %>
+                <h1 class="title">Sign In</h1>
+                <%= render "form.html", Map.put(assigns, :action, Routes.session_path(@conn, :create)) %>
             </div>
         </div>
     </div>

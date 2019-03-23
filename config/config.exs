@@ -26,7 +26,7 @@ config :logger, :console,
 config :phoenix, :json_library, Jason
 
 # Guardian
-config :video_api, VideoApi.Guardian,
+config :video_api, VideoApiWeb.Guardian,
   issuer: "video_api",
   secret_key: "wnYhbR4deb7deWcKQJjMzTKmi9SEznozGD0Rddz6JfIctlLBv6cnPV/reM4/J81F"
 

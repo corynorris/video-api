@@ -1,0 +1,10 @@
+<section class="section ">
+    <div class="container is-fullheight">
+        <div class="columns ">
+            <div class="column is-half is-offset-one-quarter">
+                <h1 class="title">Sign Up</h1>
+                <%= render "form.html", Map.put(assigns, :action, Routes.sign_up_path(@conn, :create)) %>
+            </div>
+        </div>
+    </div>
+</section>

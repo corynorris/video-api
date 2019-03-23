@@ -11,17 +11,35 @@ defmodule VideoApiWeb.Router do
     plug :put_secure_browser_headers
   end
 
-  pipeline :auth do
-    plug Guardian.AuthPipeline
+  pipeline :redirect_if_authed do
+    plug Guardian.LoadSessionPipeline
+    plug VideoApiWeb.Plugs.Redirector
+  end
+
+  pipeline :enforce_auth do
+    plug Guardian.EnforceAuthPipeline
+    plug VideoApiWeb.Plugs.CurrentUser
+    plug :put_layout, {VideoApiWeb.LayoutView, :user}
   end
 
   scope "/", VideoApiWeb do
-    pipe_through [:browser, :auth]
+    pipe_through [:browser, :redirect_if_authed]
 
     get "/", PageController, :index
 
-    get "sign_up", UserController, :new
-    # resources "/users", UserController, [:create, :show]
+    get "/sign_in", SessionController, :new
+    post "/sign_in", SessionController, :create
+
+    get "/sign_up", SignUpController, :new
+    post "/sign_up", SignUpController, :create
+  end
+
+  scope "/", VideoApiWeb do
+    pipe_through [:browser, :enforce_auth]
+
+    get "/sign_out", SessionController, :delete
+
+    resources "/users", UserController, only: [:show]
     resources "/videos", VideoController
   end
 end
