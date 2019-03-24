@@ -12,7 +12,7 @@
     </p>
     <ul class="menu-list">
       <li><%= active_link(@conn, "My Videos", "/videos") %></li>
-      <li><%= active_link(@conn, "My Jobs", "/jobs") %></li>
+      <li><%= active_link(@conn, "My Transcodings", "/transcodings") %></li>
       <li><%= active_link(@conn, "My Player", "/player") %></li>
     </ul>
     <p class="menu-label">

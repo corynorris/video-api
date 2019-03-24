@@ -17,7 +17,7 @@ defmodule VideoApi.Application do
     ]
 
     Honeydew.start_queue(:transcoding_jobs)
-    Honeydew.start_workers(:transcoding_jobs, VideoApi.Worker)
+    Honeydew.start_workers(:transcoding_jobs, VideoApi.Transcoder)
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options

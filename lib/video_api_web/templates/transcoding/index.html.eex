@@ -1,0 +1,42 @@
+<div class="column is-9">
+  <nav class="breadcrumb" aria-label="breadcrumbs">
+    <ul>
+      <li>
+        <a href="<%= Routes.dashboard_path(@conn, :index) %>" aria-current="page">Home</a>
+      </li>
+      <li>
+        <a href="<%= Routes.video_path(@conn, :index) %>">Videos</a>
+      </li>
+      <li class="is-active">
+        <a href="#" aria-current="page">Transcodings</a>
+      </li>
+    </ul>
+  </nav>
+  <h1 class="title">Your Transcodings</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Video 1080p</th>
+        <th>Video 720p</th>
+        <th>Video 420p</th>
+        <th>Video 360p</th>
+
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= for transcoding <- @transcodings do %>
+      <tr>
+        <td><%= transcoding.video_1080p %></td>
+        <td><%= transcoding.video_720p %></td>
+        <td><%= transcoding.video_420p %></td>
+        <td><%= transcoding.video_360p %></td>
+
+        <td>
+          <%= link "Show", to: Routes.transcoding_path(@conn, :show, transcoding) %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

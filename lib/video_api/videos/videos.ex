@@ -5,6 +5,7 @@ defmodule VideoApi.Videos do
 
   import Ecto.Query, warn: false
   alias VideoApi.Repo
+  alias VideoApi.Utils
   alias Ecto.Multi
   alias VideoApi.Videos.Video
 
@@ -56,17 +57,22 @@ defmodule VideoApi.Videos do
     |> Multi.run(:persist_file, fn _repo, %{video: video} ->
       persist_file(video, attrs["video_file"])
     end)
+    |> Multi.run(:begin_transcodings, fn _repo, %{video: video} ->
+      job = Honeydew.async({:transcode, [video]}, :transcoding_jobs)
+
+      {:ok, "Job Started"}
+    end)
     |> Repo.transaction()
     |> case do
       {:ok, %{video: video}} -> {:ok, video}
       {:error, :video, changeset, _} -> {:error, changeset}
-      {:error, :persist_file, changeset, _} -> {:error, "couldn't create file"}
+      {:error, :persist_file, _, _} -> {:error, "couldn't create file"}
       {:error, _, _, _} -> {:error, "Unknown error"}
     end
   end
 
   defp persist_file(video, %{path: temp_path}) do
-    video_path = build_video_path(video)
+    video_path = Utils.build_video_path(video)
 
     if File.exists?(video_path) do
       {:error, "File exists"}
@@ -74,10 +80,6 @@ defmodule VideoApi.Videos do
       video_path |> Path.dirname() |> File.mkdir_p()
       File.copy(temp_path, video_path)
     end
-  end
-
-  def build_video_path(video) do
-    Application.get_env(:video_api, :uploads_dir) |> Path.join(video.path)
   end
 
   @doc """

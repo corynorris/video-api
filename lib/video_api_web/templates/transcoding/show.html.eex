@@ -1,0 +1,27 @@
+<h1>Show Transcoding</h1>
+
+<ul>
+
+  <li>
+    <strong>Video 1080p:</strong>
+    <%= @transcoding.video_1080p %>
+  </li>
+
+  <li>
+    <strong>Video 720p:</strong>
+    <%= @transcoding.video_720p %>
+  </li>
+
+  <li>
+    <strong>Video 420p:</strong>
+    <%= @transcoding.video_420p %>
+  </li>
+
+  <li>
+    <strong>Video 360p:</strong>
+    <%= @transcoding.video_360p %>
+  </li>
+
+</ul>
+
+<span><%= link "Back", to: Routes.transcoding_path(@conn, :index) %></span>

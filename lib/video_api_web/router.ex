@@ -42,11 +42,13 @@ defmodule VideoApiWeb.Router do
     get "/dashboard", DashboardController, :index
     get "/documentation", DocumentationController, :index
 
+    resources "/videos", VideoController
+    resources "/transcodings", TranscodingController, only: [:index, :show]
+
+    resources "/user/api", ApiKeyController
     get "/user/profile", UserController, :show
 
     get "/user/profile/edit", UserController, :edit
     put "/user/profile/edit", UserController, :update
-
-    resources "/videos", VideoController
   end
 end

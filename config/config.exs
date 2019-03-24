@@ -30,7 +30,11 @@ config :video_api, VideoApiWeb.Guardian,
   issuer: "video_api",
   secret_key: "wnYhbR4deb7deWcKQJjMzTKmi9SEznozGD0Rddz6JfIctlLBv6cnPV/reM4/J81F"
 
-config :video_api, :uploads_dir, "/home/cory/Downloads/tmp/"
+config :video_api,
+  uploads_dir: "/home/cory/Downloads/tmp/",
+  transcodes_dir: "/home/cory/Downloads/tmp/transcodes"
+
+config :porcelain, driver: Porcelain.Driver.Basic
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
