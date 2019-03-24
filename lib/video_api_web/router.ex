@@ -39,7 +39,14 @@ defmodule VideoApiWeb.Router do
 
     get "/sign_out", SessionController, :delete
 
-    resources "/users", UserController, only: [:show]
+    get "/dashboard", DashboardController, :index
+    get "/documentation", DocumentationController, :index
+
+    get "/user/profile", UserController, :show
+
+    get "/user/profile/edit", UserController, :edit
+    put "/user/profile/edit", UserController, :update
+
     resources "/videos", VideoController
   end
 end

@@ -1,1 +1,25 @@
-<%= render @view_module, @view_template, assigns %>
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Video Api!</title>
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  </head>
+
+  <body>
+    <%= render VideoApiWeb.SharedView, "main_nav.html", assigns %>
+    <div class="container dashboard">
+      <div class="columns">
+        <%= render VideoApiWeb.SharedView, "side_nav.html", assigns %>
+        <%= render @view_module, @view_template, assigns %>
+      </div>
+    </div>
+    <%= render VideoApiWeb.SharedView, "footer.html", assigns %>
+  </body>
+
+</html>

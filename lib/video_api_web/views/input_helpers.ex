@@ -15,13 +15,13 @@ defmodule VideoApiWeb.InputHelpers do
     current_path = Path.join(["/" | conn.path_info])
 
     if path == current_path do
-      "active"
+      "is-active"
     else
       nil
     end
   end
 
-  def active_link(conn, text, path, opts) do
+  def active_link(conn, text, path, opts \\ []) do
     class =
       [opts[:class], active_class(conn, path)]
       |> Enum.filter(& &1)
@@ -57,7 +57,7 @@ defmodule VideoApiWeb.InputHelpers do
     end
   end
 
-  defp state_class(form, field) do
+  def state_class(form, field) do
     cond do
       # The form was not yet submitted
       !form.source.action -> ""

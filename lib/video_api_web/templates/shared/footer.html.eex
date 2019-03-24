@@ -1,0 +1,21 @@
+<footer class="footer has-text-centered">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-8-desktop is-offset-2-desktop">
+        <p>
+          <small> Source code licensed <a href="http://opensource.org/licenses/mit-license.php">MIT</a>
+          </small>
+        </p>
+        <p>
+          <small> Built with </small>
+        </p>
+        <p style="margin-top: 1rem;">
+          <a href="https://elixir-lang.org/">
+            <img src="<%= Routes.static_path(@conn, "/images/elixir.png") %>" alt="Elixir logo" width="94" height="24">
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+<script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>

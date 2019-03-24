@@ -44,7 +44,9 @@ defmodule VideoApi.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:guardian, "~> 1.2.1"},
-      {:bcrypt_elixir, "~> 2.0.1"}
+      {:bcrypt_elixir, "~> 2.0.1"},
+      {:honeydew, "~> 1.3"},
+      {:porcelain, "~> 2.0"}
     ]
   end
 

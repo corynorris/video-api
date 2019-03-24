@@ -1,127 +1,44 @@
-<div class="container dashboard">
-  <div class="columns">
-    <%= render VideoApiWeb.SharedView, "side_nav.html", assigns %>
-    <div class="column is-9">
-      <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-          <li><a href="../">Bulma</a></li>
-          <li><a href="../">Templates</a></li>
-          <li><a href="../">Examples</a></li>
-          <li class="is-active"><a href="#" aria-current="page"><%= @current_user.first_name %></a></li>
-        </ul>
-      </nav>
-      <section class="hero is-info welcome is-small">
-        <div class="hero-body">
-          <div class="container">
-            <h1 class="title">
-              Hello, <%= @current_user.first_name %>.
-            </h1>
-            <h2 class="subtitle">
-              I hope you are having a great day!
-            </h2>
-          </div>
-        </div>
-      </section>
-      <section class="info-tiles">
-        <div class="tile is-ancestor has-text-centered">
-          <div class="tile is-parent">
-            <article class="tile is-child box">
-              <p class="title">439k</p>
-              <p class="subtitle">Users</p>
-            </article>
-          </div>
-          <div class="tile is-parent">
-            <article class="tile is-child box">
-              <p class="title">59k</p>
-              <p class="subtitle">Products</p>
-            </article>
-          </div>
-          <div class="tile is-parent">
-            <article class="tile is-child box">
-              <p class="title">3.4k</p>
-              <p class="subtitle">Open Orders</p>
-            </article>
-          </div>
-          <div class="tile is-parent">
-            <article class="tile is-child box">
-              <p class="title">19</p>
-              <p class="subtitle">Exceptions</p>
-            </article>
-          </div>
-        </div>
-      </section>
-      <div class="columns">
-        <div class="column is-12">
-          <div class="card events-card">
-            <header class="card-header">
-              <p class="card-header-title">
-                Events
-              </p>
-              <a href="#" class="card-header-icon" aria-label="more options">
-                <span class="icon">
-                  <i class="fa fa-angle-down" aria-hidden="true"></i>
-                </span>
-              </a>
-            </header>
-            <div class="card-table">
-              <div class="content">
-                <table class="table is-fullwidth is-striped">
-                  <tbody>
-                    <tr>
-                      <td width="5%"><i class="fa fa-bell-o"></i></td>
-                      <td>Lorum ipsum dolem aire</td>
-                      <td><a class="button is-small is-primary" href="#">Action</a></td>
-                    </tr>
-                    <tr>
-                      <td width="5%"><i class="fa fa-bell-o"></i></td>
-                      <td>Lorum ipsum dolem aire</td>
-                      <td><a class="button is-small is-primary" href="#">Action</a></td>
-                    </tr>
-                    <tr>
-                      <td width="5%"><i class="fa fa-bell-o"></i></td>
-                      <td>Lorum ipsum dolem aire</td>
-                      <td><a class="button is-small is-primary" href="#">Action</a></td>
-                    </tr>
-                    <tr>
-                      <td width="5%"><i class="fa fa-bell-o"></i></td>
-                      <td>Lorum ipsum dolem aire</td>
-                      <td><a class="button is-small is-primary" href="#">Action</a></td>
-                    </tr>
-                    <tr>
-                      <td width="5%"><i class="fa fa-bell-o"></i></td>
-                      <td>Lorum ipsum dolem aire</td>
-                      <td><a class="button is-small is-primary" href="#">Action</a></td>
-                    </tr>
-                    <tr>
-                      <td width="5%"><i class="fa fa-bell-o"></i></td>
-                      <td>Lorum ipsum dolem aire</td>
-                      <td><a class="button is-small is-primary" href="#">Action</a></td>
-                    </tr>
-                    <tr>
-                      <td width="5%"><i class="fa fa-bell-o"></i></td>
-                      <td>Lorum ipsum dolem aire</td>
-                      <td><a class="button is-small is-primary" href="#">Action</a></td>
-                    </tr>
-                    <tr>
-                      <td width="5%"><i class="fa fa-bell-o"></i></td>
-                      <td>Lorum ipsum dolem aire</td>
-                      <td><a class="button is-small is-primary" href="#">Action</a></td>
-                    </tr>
-                    <tr>
-                      <td width="5%"><i class="fa fa-bell-o"></i></td>
-                      <td>Lorum ipsum dolem aire</td>
-                      <td><a class="button is-small is-primary" href="#">Action</a></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <footer class="card-footer">
-              <a href="#" class="card-footer-item">View All</a>
-            </footer>
-          </div>
-        </div>
-      </div>
-    </div>
+<div class="column is-9">
+  <nav class="breadcrumb" aria-label="breadcrumbs">
+    <ul>
+      <li>
+        <a href="<%= Routes.dashboard_path(@conn, :index) %>" aria-current="page">Home</a>
+      </li>
+      <li class="is-active">
+        <a href="#" aria-current="page">Videos</a>
+      </li>
+    </ul>
+  </nav>
+  <h1 class="title">Your Videos</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Filename</th>
+        <th>Content type</th>
+        <th>Path</th>
 
-  </div>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= for video <- @videos do %>
+      <tr>
+        <td><%= video.title %></td>
+        <td><%= video.filename %></td>
+        <td><%= video.content_type %></td>
+        <td><%= video.path %></td>
+
+        <td>
+          <%= link "Show", to: Routes.video_path(@conn, :show, video) %>
+          <%= link "Edit", to: Routes.video_path(@conn, :edit, video) %>
+          <%= link "Delete", to: Routes.video_path(@conn, :delete, video), method: :delete, data: [confirm: "Are you sure?"] %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <span>
+    <a class="button is-link" href="<%= Routes.video_path(@conn, :new) %>">New Video</a>
+  </span>
+</div>

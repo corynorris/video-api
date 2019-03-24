@@ -22,7 +22,14 @@ defmodule VideoApiWeb.VideoController do
         |> redirect(to: Routes.video_path(conn, :show, video))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        conn
+        |> put_flash(:error, "An unknown error has occured.")
+        |> render("new.html", changeset: changeset)
+
+      {:error, other} ->
+        conn
+        |> put_flash(:error, other)
+        |> render("new.html")
     end
   end
 

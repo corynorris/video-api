@@ -21,12 +21,8 @@ defmodule VideoApiWeb.SessionController do
         |> redirect(to: Routes.video_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
+        changeset = Map.put(changeset, :action, :insert)
         render(conn, "sign_in.html", changeset: changeset)
-
-      {:error, :invalid_credentials} ->
-        conn
-        |> put_status(:unauthorized)
-        |> render("sign_in.html")
     end
   end
 

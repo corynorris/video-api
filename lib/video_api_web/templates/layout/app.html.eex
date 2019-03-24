@@ -1,86 +1,21 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Video Api!</title>
-  <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-</head>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Video Api!</title>
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  </head>
 
-<body>
-  <nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="container">
-      <div class="navbar-brand">
-        <%= if Guardian.Plug.authenticated?(@conn, []) do %>
-        <a class="navbar-item" href="<%= brand_link(@conn, "/videos")%>">
-          <img src="<%= Routes.static_path(@conn, "/images/elixir-logo.svg") %>" width="130" height="32">
-        </a>
-        <% else %>
-        <a class="navbar-item" href="<%= brand_link(@conn, "/")%>">
-          <img src="<%= Routes.static_path(@conn, "/images/elixir-logo.svg") %>" width="130" height="32">
-        </a>
-        <% end %>
-        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
-          data-target="navbar-basic">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
+  <body>
+    <%= render VideoApiWeb.SharedView, "main_nav.html", assigns %>
+    <%= render @view_module, @view_template, assigns %>
+    <%= render VideoApiWeb.SharedView, "footer.html", assigns %>
 
-      <div id="navbar-basic" class="navbar-menu">
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <div class="buttons">
-              <%= if Guardian.Plug.authenticated?(@conn, []) do %>
-              <a href="<%= Routes.session_path(@conn, :delete) %>" class="button is-light">
-                Sign Out
-              </a>
-              <% else %>
-              <a href="<%= Routes.sign_up_path(@conn, :new) %>" class="button is-primary">
-                <strong>Sign up</strong>
-              </a>
-              <a href="<%= Routes.session_path(@conn, :new) %>" class="button is-light">
-                Sign in
-              </a>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </div>
-  </nav>
-  <%= render @view_module, @view_template, assigns %>
-
-  <footer class="footer has-text-centered">
-    <div class="container">
-      <div class="columns">
-        <div class="column is-8-desktop is-offset-2-desktop">
-          <p>
-            <small>
-              Source code licensed <a href="http://opensource.org/licenses/mit-license.php">MIT</a>
-            </small>
-          </p>
-          <p>
-            <small>
-              Built with
-            </small>
-          </p>
-          <p style="margin-top: 1rem;">
-            <a href="https://elixir-lang.org/">
-              <img src="<%= Routes.static_path(@conn, "/images/elixir.png") %>" alt="Elixir logo" width="94"
-                height="24">
-            </a>
-          </p>
-        </div>
-      </div>
-    </div>
-  </footer>
-  <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
-</body>
+  </body>
 
 </html>

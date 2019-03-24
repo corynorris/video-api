@@ -9,7 +9,7 @@ defmodule VideoApi.Accounts.Encryption do
 
   @spec validate_password(User.t(), any()) ::
           {:error, String.t()} | {:ok, any()}
-  def validate_password(%User{} = user, password),
+  def validate_password(user, password),
     do: Bcrypt.check_pass(user, password, hash_key: :password)
 
   @spec hash_password(nil | binary()) :: any()

@@ -8,13 +8,11 @@ defmodule VideoApiWeb.Plugs.Redirector do
     opts
   end
 
+  @spec call(Plug.Conn.t(), any()) :: Plug.Conn.t()
   def call(conn, _opts) do
     if Guardian.Plug.authenticated?(conn, []) do
-      IO.puts("authenticated, redirecting to video")
-      redirect(conn, to: Routes.video_path(conn, :index))
+      redirect(conn, to: Routes.dashboard_path(conn, :index))
     else
-      IO.puts("not authenticated")
-
       conn
     end
   end

@@ -1,27 +1,27 @@
 <div class="column is-3">
-    <aside class="menu is-hidden-mobile">
-        <p class="menu-label">
-            General
-        </p>
-        <ul class="menu-list">
-            <li><a class="is-active">Dashboard</a></li>
-            <li><a class="">Documentation</a></li>
-        </ul>
-        <p class="menu-label">
-            Videos
-        </p>
-        <ul class="menu-list">
-            <li><a>My Uploads</a></li>
-            <li><a>Transcoding Jobs</a></li>
-            <li><a>Player Details</a></li>
-        </ul>
-        <p class="menu-label">
-            Account
-        </p>
-        <ul class="menu-list">
-            <li><a>API Key</a></li>
-            <li><a>Edit Profile</a></li>
-            <li><a>Authentication</a></li>
-        </ul>
-    </aside>
+  <aside class="menu is-hidden-mobile">
+    <p class="menu-label">
+      General
+    </p>
+    <ul class="menu-list">
+      <li><%= active_link(@conn, "Dashboard", "/dashboard") %></li>
+      <li><%= active_link(@conn, "Documentation", "/documentation") %></li>
+    </ul>
+    <p class="menu-label">
+      Videos
+    </p>
+    <ul class="menu-list">
+      <li><%= active_link(@conn, "My Videos", "/videos") %></li>
+      <li><%= active_link(@conn, "My Jobs", "/jobs") %></li>
+      <li><%= active_link(@conn, "My Player", "/player") %></li>
+    </ul>
+    <p class="menu-label">
+      Account
+    </p>
+    <ul class="menu-list">
+      <li><%= active_link(@conn, "API Key", "/user/api") %></li>
+      <li><%= active_link(@conn, "Profile", "/user/profile") %></li>
+      <li><%= active_link(@conn, "Edit Profile", "/user/profile/edit") %></li>
+    </ul>
+  </aside>
 </div>

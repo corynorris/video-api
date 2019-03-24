@@ -17,6 +17,8 @@ defmodule VideoApiWeb.SignUpController do
         |> redirect(to: Routes.video_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
+        IO.inspect("error")
+        IO.inspect(changeset)
         render(conn, "sign_up.html", changeset: changeset)
     end
   end

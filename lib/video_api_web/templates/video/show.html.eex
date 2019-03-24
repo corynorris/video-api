@@ -1,33 +1,49 @@
-<h1>Show Video</h1>
+<div class="column is-9">
+  <nav class="breadcrumb" aria-label="breadcrumbs">
+    <ul>
+      <li>
+        <a href="<%= Routes.dashboard_path(@conn, :index) %>" aria-current="page">Home</a>
+      </li>
+      <li>
+        <a href="<%= Routes.video_path(@conn, :index) %>">Videos</a>
+      </li>
+      <li class="is-active">
+        <a href="#" aria-current="page">Video</a>
+      </li>
+    </ul>
+  </nav>
+  <h1 class="title">Show Video</h1>
 
-<ul>
+  <div class="content">
+    <ul>
+      <li>
+        <strong>Title:</strong>
+        <%= @video.title %>
+      </li>
 
-  <li>
-    <strong>Title:</strong>
-    <%= @video.title %>
-  </li>
+      <li>
+        <strong>Description:</strong>
+        <%= @video.description %>
+      </li>
 
-  <li>
-    <strong>Description:</strong>
-    <%= @video.description %>
-  </li>
+      <li>
+        <strong>Filename:</strong>
+        <%= @video.filename %>
+      </li>
 
-  <li>
-    <strong>Filename:</strong>
-    <%= @video.filename %>
-  </li>
+      <li>
+        <strong>Content type:</strong>
+        <%= @video.content_type %>
+      </li>
 
-  <li>
-    <strong>Content type:</strong>
-    <%= @video.content_type %>
-  </li>
+      <li>
+        <strong>Path:</strong>
+        <%= @video.path %>
+      </li>
 
-  <li>
-    <strong>Path:</strong>
-    <%= @video.path %>
-  </li>
+    </ul>
 
-</ul>
-
-<span><%= link "Edit", to: Routes.video_path(@conn, :edit, @video) %></span>
-<span><%= link "Back", to: Routes.video_path(@conn, :index) %></span>
+    <%= link "Edit", to: Routes.video_path(@conn, :edit, @video), class: "button" %>
+    <%= link "Back", to: Routes.video_path(@conn, :index), class: "button" %>
+  </div>
+</div>

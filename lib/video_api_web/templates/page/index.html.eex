@@ -10,10 +10,9 @@
     </div>
   </div>
 </section>
-
 <div class="box cta">
   <p class="has-text-centered">
-    <span class="tag is-primary">New</span> Now supports four formats: 1080p, 720p, 480p and 360p.
+    <span class="tag is-link">New</span> Now supports four formats: 1080p, 720p, 480p and 360p.
   </p>
 </div>
 <section class="container">
