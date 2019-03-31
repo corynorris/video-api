@@ -23,17 +23,19 @@ defmodule VideoApi.AuthTokens do
       ** (Ecto.NoResultsError)
 
   """
-  def get_auth_token!(id), do: Repo.get!(AuthToken, id)
+  def get_auth_token(user, auth_token_id) do
+    Repo.one(from v in AuthToken, where: v.user_id == ^user.id and v.id == ^auth_token_id)
+  end
 
   @doc """
   Lists auth tokens
 
   ## Examples
-    iex> list_auth_tokens(user)
+    iex> list_auth_tokens(property)
     [%AuthToken{}, ...]
   """
-  def list_auth_tokens(user, pagination) do
-    user
+  def list_auth_tokens(property, pagination) do
+    property
     |> Ecto.assoc(:auth_tokens)
     |> Ecto.Query.order_by(desc: :revoked_at)
     |> Repo.paginate(pagination)
@@ -62,8 +64,8 @@ defmodule VideoApi.AuthTokens do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_auth_token(user) do
-    user
+  def create_auth_token(property) do
+    property
     |> Ecto.build_assoc(:auth_tokens)
     |> AuthToken.changeset(%{
       token: generate_auth_token(@length)
@@ -83,10 +85,10 @@ defmodule VideoApi.AuthTokens do
       {:error, %Ecto.Changeset{}}
 
   """
-  def revoke_auth_token(user, id) do
+  def revoke_auth_token(property, id) do
     {id, ""} = Integer.parse(id)
 
-    user
+    property
     |> Ecto.build_assoc(:auth_tokens, %{id: id})
     |> AuthToken.revoke_changeset()
     |> Repo.update()

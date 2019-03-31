@@ -13,13 +13,10 @@ defmodule VideoApi.Videos do
     # video count
     count = Repo.one(from v in "videos", select: count(v.id), where: v.user_id == ^user.id)
 
-    # video length
-    # {:ok, count} = Repo.one(from v in "videos", select: count(v.id), where: v.user_id == ^user.id)
-
     # published count
     # count = Repo.one(from v in "videos", select: count(v.id), where: v.user_id == ^user.id and v.published==true)
 
-    %{count: count}
+    %{count: count, published: 0}
   end
 
   @doc """
@@ -50,7 +47,9 @@ defmodule VideoApi.Videos do
       ** (Ecto.NoResultsError)
 
   """
-  def get_video!(id), do: Repo.get!(Video, id)
+  def get_video(user, video_id) do
+    Repo.one(from v in Video, where: v.user_id == ^user.id and v.id == ^video_id)
+  end
 
   @doc """
   Transaction to save, persist file, and start encoding
@@ -114,7 +113,7 @@ defmodule VideoApi.Videos do
   """
   def update_video(%Video{} = video, attrs) do
     video
-    |> Video.changeset(attrs)
+    |> Video.update_changeset(attrs)
     |> Repo.update()
   end
 

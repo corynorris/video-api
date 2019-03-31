@@ -27,20 +27,20 @@
       </div>
       <div class="tile is-parent">
         <article class="tile is-child box">
-          <p class="title">0</p>
+          <p class="title"><%= @video_stats.published %></p>
           <p class="subtitle">Published</p>
         </article>
       </div>
       <div class="tile is-parent">
         <article class="tile is-child box">
-          <p class="title">0</p>
-          <p class="subtitle">Hours</p>
+          <p class="title"><%= @property_stats.count %></p>
+          <p class="subtitle">Sites</p>
         </article>
       </div>
       <div class="tile is-parent">
         <article class="tile is-child box">
-          <p class="title">0</p>
-          <p class="subtitle">Views</p>
+          <p class="title"><%=  @events.total_entries %></p>
+          <p class="subtitle">Logs</p>
         </article>
       </div>
     </div>
@@ -49,7 +49,7 @@
     <div class="column is-12">
       <div class="card events-card">
         <header class="card-header">
-          <p class="card-header-title"> Events </p>
+          <p class="card-header-title"> Transcodings </p>
         </header>
         <div class="card-table">
           <div class="content">

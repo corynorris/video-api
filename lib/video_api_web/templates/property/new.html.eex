@@ -1,0 +1,17 @@
+<div class="column is-9">
+  <nav class="breadcrumb" aria-label="breadcrumbs">
+    <ul>
+      <li>
+        <a href="<%= Routes.dashboard_path(@conn, :index) %>" aria-current="page">Home</a>
+      </li>
+      <li>
+        <a href="<%= Routes.property_path(@conn, :index) %>">Properties</a>
+      </li>
+      <li class="is-active">
+        <a href="#" aria-current="page">Create</a>
+      </li>
+    </ul>
+  </nav>
+  <h1 class="title">New Property</h1>
+  <%= render "form.html", Map.put(assigns, :action, Routes.property_path(@conn, :create)) %>
+</div>

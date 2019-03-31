@@ -1,0 +1,42 @@
+<div class="column is-9">
+  <nav class="breadcrumb" aria-label="breadcrumbs">
+    <ul>
+      <li>
+        <a href="<%= Routes.dashboard_path(@conn, :index) %>" aria-current="page">Home</a>
+      </li>
+      <li class="is-active">
+        <a href="#" aria-current="page">Properties</a>
+      </li>
+    </ul>
+  </nav>
+  <h1 class="title">Your Properties</h1>
+  <table class="table is-striped is-fullwidth is-bordered">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>url</th>
+        <th>description</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <%= for property <- @properties do %>
+      <tr>
+        <td style="flex-grow: 3"><%= property.title %></td>
+        <td><%= property.title %></td>
+        <td><%= property.url %></td>
+        <td>
+          <%= link "Show", to: Routes.property_path(@conn, :show, property), class: "button is-small" %>
+          <%= link "Edit", to: Routes.property_path(@conn, :edit, property), class: "button is-small" %>
+          <%= link "Delete", to: Routes.property_path(@conn, :delete, property), method: :delete, data: [confirm: "Are you sure?"], class: "button is-small is-danger" %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= pagination_links @properties %>
+  <span>
+    <a class="button is-link" href="<%= Routes.property_path(@conn, :new) %>">New Property</a>
+  </span>
+</div>

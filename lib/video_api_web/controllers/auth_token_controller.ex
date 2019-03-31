@@ -13,7 +13,7 @@ defmodule VideoApiWeb.AuthTokenController do
     user = Guardian.Plug.current_resource(conn)
 
     case AuthTokens.create_auth_token(user) do
-      {:ok, auth_token} ->
+      {:ok, _auth_token} ->
         conn
         |> put_flash(:info, "Api key created successfully.")
         |> redirect(to: Routes.auth_token_path(conn, :index))

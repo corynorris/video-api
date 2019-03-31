@@ -20,7 +20,9 @@ defmodule VideoApi.Transcodings do
 
   """
   def list_transcodings(user, pagination) do
-    Ecto.assoc(user, :transcoding_logs)
+    user
+    |> Ecto.assoc(:transcoding_logs)
+    |> Ecto.Query.order_by(desc: :inserted_at)
     |> Repo.paginate(pagination)
   end
 

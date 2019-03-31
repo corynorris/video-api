@@ -49,12 +49,13 @@ defmodule VideoApiWeb.Router do
 
     resources "/videos", VideoController
     resources "/transcodings", TranscodingController, only: [:index, :show]
-
+    resources "/properties", PropertyController
+    
     get "/user/auth", AuthTokenController, :index
     post "/user/auth/generate", AuthTokenController, :new
     delete "/user/auth/:id", AuthTokenController, :delete
-    get "/user/profile", UserController, :show
 
+    get "/user/profile", UserController, :show
     get "/user/profile/edit", UserController, :edit
     put "/user/profile/edit", UserController, :update
   end

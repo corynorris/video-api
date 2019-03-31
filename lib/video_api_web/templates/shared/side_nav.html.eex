@@ -12,14 +12,15 @@
     </p>
     <ul class="menu-list">
       <li><%= active_link(@conn, "My Videos", Routes.video_path(@conn, :index)) %></li>
-      <li><%= active_link(@conn, "Auth Tokens", Routes.auth_token_path(@conn, :index)) %></li>
+      <li><%= active_link(@conn, "Properties", Routes.property_path(@conn, :index)) %></li>
+
       <%# <li><%= active_link(@conn, "Transcoding Logs", "/transcodings") %>
     </ul>
     <p class="menu-label">
       Profile
     </p>
     <ul class="menu-list">
-      <li><%= active_link(@conn, "My Profile", Routes.user_path(@conn, :show)) %></li>
+      <li><%= active_link(@conn, "View Profile", Routes.user_path(@conn, :show)) %></li>
       <li><%= active_link(@conn, "Edit Profile", Routes.user_path(@conn, :edit)) %></li>
     </ul>
   </aside>

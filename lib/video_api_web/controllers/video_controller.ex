@@ -37,18 +37,21 @@ defmodule VideoApiWeb.VideoController do
   end
 
   def show(conn, %{"id" => id}) do
-    video = Videos.get_video!(id)
+    user = Guardian.Plug.current_resource(conn)
+    video = Videos.get_video(user, id)
     render(conn, "show.html", video: video)
   end
 
   def edit(conn, %{"id" => id}) do
-    video = Videos.get_video!(id)
+    user = Guardian.Plug.current_resource(conn)
+    video = Videos.get_video(user, id)
     changeset = Videos.change_video(video)
     render(conn, "edit.html", video: video, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "video" => video_params}) do
-    video = Videos.get_video!(id)
+    user = Guardian.Plug.current_resource(conn)
+    video = Videos.get_video(user, id)
 
     case Videos.update_video(video, video_params) do
       {:ok, video} ->
@@ -62,7 +65,8 @@ defmodule VideoApiWeb.VideoController do
   end
 
   def delete(conn, %{"id" => id}) do
-    video = Videos.get_video!(id)
+    user = Guardian.Plug.current_resource(conn)
+    video = Videos.get_video(user, id)
     {:ok, _video} = Videos.delete_video(video)
 
     conn

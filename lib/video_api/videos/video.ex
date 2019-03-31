@@ -2,8 +2,9 @@ defmodule VideoApi.Videos.Video do
   use Ecto.Schema
   import Ecto.Changeset
 
-  @required_fields ~w(title video_file)a
-  @optional_fields ~w(description)a
+  @required_create_fields ~w(title video_file)a
+  @optional_create_fields ~w(description)a
+  @optional_update_fields ~w(title description)a
   @valid_mimes ~w(video/mp4)
 
   schema "videos" do
@@ -22,11 +23,17 @@ defmodule VideoApi.Videos.Video do
   @doc false
   def changeset(video, attrs) do
     video
-    |> cast(attrs, @required_fields ++ @optional_fields)
-    |> validate_required(@required_fields)
+    |> cast(attrs, @required_create_fields ++ @optional_create_fields)
+    |> validate_required(@required_create_fields)
     |> foreign_key_constraint(:user_id)
     |> validate_video_content_type(@valid_mimes)
     |> put_video_file_contents()
+  end
+
+  def update_changeset(video, attrs) do
+    video
+    |> cast(attrs, @optional_update_fields)
+    |> foreign_key_constraint(:user_id)
   end
 
   def update_status_changeset(video, attrs) do

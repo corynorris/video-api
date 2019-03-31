@@ -7,8 +7,8 @@ defmodule VideoApi.Transcodings.TranscodingLog do
   schema "transcoding_logs" do
     field :level, ErrorLevelEnum
     field :message, :string
+    field :inserted_at, :utc_datetime
     belongs_to(:video, VideoApi.Videos.Video)
-    timestamps()
   end
 
   @doc false
@@ -17,5 +17,6 @@ defmodule VideoApi.Transcodings.TranscodingLog do
     |> cast(attrs, @required_fields)
     |> validate_required(@required_fields)
     |> foreign_key_constraint(:video_id)
+    |> put_change(:inserted_at, DateTime.truncate(DateTime.utc_now(), :second))
   end
 end

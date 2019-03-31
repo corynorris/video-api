@@ -3,12 +3,11 @@ defmodule VideoApi.Repo.Migrations.CreatePublishedTable do
 
   def change do
     create table(:published) do
-      add :published_at, :utc_datetime
-      add :message, :text
       add :video_id, references(:videos, on_delete: :delete_all)
-      
+      add :property_id, references(:properties, on_delete: :delete_all)
+    end
+
+    create index(:published, [:video_id])
+    create index(:published, [:property_id])
   end
-
-  create index(:published, [:video_id])
-
 end

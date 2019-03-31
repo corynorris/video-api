@@ -1,0 +1,41 @@
+<div class="column is-9">
+  <nav class="breadcrumb" aria-label="breadcrumbs">
+    <ul>
+      <li>
+        <a href="<%= Routes.dashboard_path(@conn, :index) %>" aria-current="page">Home</a>
+      </li>
+      <li>
+        <a href="<%= Routes.video_path(@conn, :index) %>">Videos</a>
+      </li>
+      <li class="is-active">
+        <a href="#" aria-current="page">Video</a>
+      </li>
+    </ul>
+  </nav>
+  <h1 class="title">Show Property</h1>
+
+  <div class="content">
+
+    <ul>
+
+      <li>
+        <strong>Title:</strong>
+        <%= @property.title %>
+      </li>
+
+      <li>
+        <strong>Url:</strong>
+        <%= @property.url %>
+      </li>
+
+      <li>
+        <strong>Description:</strong>
+        <%= @property.description %>
+      </li>
+
+    </ul>
+
+    <%= link "Edit", to: Routes.property_path(@conn, :edit, @property), class: "button" %>
+    <%= link "Back", to: Routes.property_path(@conn, :index), class: "button" %>
+  </div>
+</div>

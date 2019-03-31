@@ -10,5 +10,7 @@ defmodule VideoApi.Repo.Migrations.CreateVideos do
       add :path, :string
       timestamps()
     end
+
+    create(unique_index(:videos, [:path]))
   end
 end
