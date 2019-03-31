@@ -7,6 +7,7 @@ defmodule VideoApi.Accounts.Users do
 
   import Ecto.Query, warn: false
 
+  def get_user(id), do: Repo.get(User, id)
   def get_user!(id), do: Repo.get!(User, id)
 
   def create_user(attrs \\ %{}) do

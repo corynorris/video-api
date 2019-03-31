@@ -4,8 +4,9 @@ defmodule VideoApiWeb.VideoController do
   alias VideoApi.Videos
   alias VideoApi.Videos.Video
 
-  def index(conn, _params) do
-    videos = Videos.list_videos()
+  def index(conn, params) do
+    user = Guardian.Plug.current_resource(conn)
+    videos = Videos.list_videos(user, params)
     render(conn, "index.html", videos: videos)
   end
 
@@ -15,7 +16,9 @@ defmodule VideoApiWeb.VideoController do
   end
 
   def create(conn, %{"video" => video_params}) do
-    case Videos.create_video(video_params) do
+    user = Guardian.Plug.current_resource(conn)
+
+    case Videos.create_video(user, video_params) do
       {:ok, video} ->
         conn
         |> put_flash(:info, "Video created successfully.")

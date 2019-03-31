@@ -8,9 +8,12 @@ defmodule VideoApiWeb.Guardian do
   end
 
   def resource_from_claims(%{"sub" => id}) do
-    case Users.get_user!(id) do
-      nil -> {:error, :resource_not_found}
-      user -> {:ok, user}
+    case Users.get_user(id) do
+      nil ->
+        {:error, :resource_not_found}
+
+      user ->
+        {:ok, user}
     end
   end
 end

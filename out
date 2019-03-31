@@ -1,0 +1,3 @@
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x5560e46cecc0] Format mov,mp4,m4a,3gp,3g2,mj2 detected only with low score of 1, misdetection possible!
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x5560e46cecc0] moov atom not found
+/home/cory/Downloads/tmp/1c2aa401-8577-42cc-aae2-bdce7de5089f.mp4: Invalid data found when processing input

@@ -23,6 +23,10 @@ defmodule VideoApiWeb.Router do
   end
 
   scope "/", VideoApiWeb do
+    pipe_through [:browser]
+  end
+
+  scope "/", VideoApiWeb do
     pipe_through [:browser, :redirect_if_authed]
 
     get "/", PageController, :index
@@ -35,6 +39,7 @@ defmodule VideoApiWeb.Router do
   end
 
   scope "/", VideoApiWeb do
+    get "/watch/:id", WatchController, :show
     pipe_through [:browser, :enforce_auth]
 
     get "/sign_out", SessionController, :delete
@@ -45,7 +50,9 @@ defmodule VideoApiWeb.Router do
     resources "/videos", VideoController
     resources "/transcodings", TranscodingController, only: [:index, :show]
 
-    resources "/user/api", ApiKeyController
+    get "/user/auth", AuthTokenController, :index
+    post "/user/auth/generate", AuthTokenController, :new
+    delete "/user/auth/:id", AuthTokenController, :delete
     get "/user/profile", UserController, :show
 
     get "/user/profile/edit", UserController, :edit

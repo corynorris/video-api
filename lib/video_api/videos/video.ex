@@ -13,7 +13,9 @@ defmodule VideoApi.Videos.Video do
     field :content_type, :string
     field :filename, :string
     field :path, :string
-
+    field :status, StatusEnum, default: 0
+    belongs_to(:user, VideoApi.Accounts.User)
+    has_many(:transcoding_logs, VideoApi.Transcodings.TranscodingLog)
     timestamps()
   end
 
@@ -22,8 +24,15 @@ defmodule VideoApi.Videos.Video do
     video
     |> cast(attrs, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
+    |> foreign_key_constraint(:user_id)
     |> validate_video_content_type(@valid_mimes)
     |> put_video_file_contents()
+  end
+
+  def update_status_changeset(video, attrs) do
+    video
+    |> cast(attrs, [:status])
+    |> validate_required([:status])
   end
 
   defp validate_video_content_type(changeset, content_types) do

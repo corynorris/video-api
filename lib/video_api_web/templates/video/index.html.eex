@@ -10,34 +10,32 @@
     </ul>
   </nav>
   <h1 class="title">Your Videos</h1>
-  <table class="table">
+  <table class="table is-striped is-fullwidth is-bordered">
     <thead>
       <tr>
         <th>Title</th>
-        <th>Filename</th>
         <th>Content type</th>
-        <th>Path</th>
-
-        <th></th>
+        <th>Transcoding</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
+
       <%= for video <- @videos do %>
       <tr>
-        <td><%= video.title %></td>
-        <td><%= video.filename %></td>
+        <td style="flex-grow: 3"><%= video.title %></td>
         <td><%= video.content_type %></td>
-        <td><%= video.path %></td>
-
+        <td><%= video.status %></td>
         <td>
-          <%= link "Show", to: Routes.video_path(@conn, :show, video) %>
-          <%= link "Edit", to: Routes.video_path(@conn, :edit, video) %>
-          <%= link "Delete", to: Routes.video_path(@conn, :delete, video), method: :delete, data: [confirm: "Are you sure?"] %>
+          <%= link "Show", to: Routes.video_path(@conn, :show, video), class: "button is-small" %>
+          <%= link "Edit", to: Routes.video_path(@conn, :edit, video), class: "button is-small" %>
+          <%= link "Delete", to: Routes.video_path(@conn, :delete, video), method: :delete, data: [confirm: "Are you sure?"], class: "button is-small is-danger" %>
         </td>
       </tr>
       <% end %>
     </tbody>
   </table>
+  <%= pagination_links @videos %>
   <span>
     <a class="button is-link" href="<%= Routes.video_path(@conn, :new) %>">New Video</a>
   </span>

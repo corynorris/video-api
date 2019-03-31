@@ -14,7 +14,9 @@ defmodule VideoApi.Accounts.User do
     field :first_name, :string
     field :last_name, :string
     field :password, :string
-
+    has_many(:videos, VideoApi.Videos.Video)
+    has_many(:auth_tokens, VideoApi.AuthTokens.AuthToken)
+    has_many(:transcoding_logs, through: [:videos, :transcoding_logs])
     timestamps()
   end
 

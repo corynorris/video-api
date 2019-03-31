@@ -1,6 +1,7 @@
 defmodule VideoApiWeb.SignUpController do
   use VideoApiWeb, :controller
 
+  alias VideoApiWeb.Guardian
   alias VideoApi.Accounts
   alias VideoApi.Accounts.User
 
@@ -13,12 +14,11 @@ defmodule VideoApiWeb.SignUpController do
     case Accounts.create_user(user_params) do
       {:ok, user} ->
         conn
+        |> Guardian.Plug.sign_in(user)
         |> put_flash(:info, "User created successfully.")
-        |> redirect(to: Routes.video_path(conn, :index))
+        |> redirect(to: Routes.dashboard_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        IO.inspect("error")
-        IO.inspect(changeset)
         render(conn, "sign_up.html", changeset: changeset)
     end
   end

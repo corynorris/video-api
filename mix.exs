@@ -46,7 +46,10 @@ defmodule VideoApi.MixProject do
       {:guardian, "~> 1.2.1"},
       {:bcrypt_elixir, "~> 2.0.1"},
       {:honeydew, "~> 1.3"},
-      {:porcelain, "~> 2.0"}
+      {:porcelain, "~> 2.0"},
+      {:ecto_enum, "~> 1.2"},
+      {:scrivener_ecto, "~> 2.0"},
+      {:scrivener_html, "~> 1.8"}
     ]
   end
 

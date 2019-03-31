@@ -4,24 +4,23 @@
       General
     </p>
     <ul class="menu-list">
-      <li><%= active_link(@conn, "Dashboard", "/dashboard") %></li>
-      <li><%= active_link(@conn, "Documentation", "/documentation") %></li>
+      <li><%= active_link(@conn, "Dashboard", Routes.dashboard_path(@conn, :index)) %></li>
+      <li><%= active_link(@conn, "Documentation", Routes.documentation_path(@conn, :index)) %></li>
     </ul>
     <p class="menu-label">
       Videos
     </p>
     <ul class="menu-list">
-      <li><%= active_link(@conn, "My Videos", "/videos") %></li>
-      <li><%= active_link(@conn, "My Transcodings", "/transcodings") %></li>
-      <li><%= active_link(@conn, "My Player", "/player") %></li>
+      <li><%= active_link(@conn, "My Videos", Routes.video_path(@conn, :index)) %></li>
+      <li><%= active_link(@conn, "Auth Tokens", Routes.auth_token_path(@conn, :index)) %></li>
+      <%# <li><%= active_link(@conn, "Transcoding Logs", "/transcodings") %>
     </ul>
     <p class="menu-label">
-      Account
+      Profile
     </p>
     <ul class="menu-list">
-      <li><%= active_link(@conn, "API Key", "/user/api") %></li>
-      <li><%= active_link(@conn, "Profile", "/user/profile") %></li>
-      <li><%= active_link(@conn, "Edit Profile", "/user/profile/edit") %></li>
+      <li><%= active_link(@conn, "My Profile", Routes.user_path(@conn, :show)) %></li>
+      <li><%= active_link(@conn, "Edit Profile", Routes.user_path(@conn, :edit)) %></li>
     </ul>
   </aside>
 </div>

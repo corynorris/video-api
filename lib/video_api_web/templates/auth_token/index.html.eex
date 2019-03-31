@@ -1,0 +1,46 @@
+<div class="column is-9">
+  <nav class="breadcrumb" aria-label="breadcrumbs">
+    <ul>
+      <li>
+        <a href="<%= Routes.dashboard_path(@conn, :index) %>" aria-current="page">Home</a>
+      </li>
+      <li class="is-active">
+        <a href="#" aria-current="page">Auth Tokens</a>
+      </li>
+    </ul>
+  </nav>
+  <h1 class="title">Listing Auth Tokens</h1>
+
+  <table class="table is-striped is-fullwidth is-bordered">
+    <thead>
+      <tr>
+        <th>Token</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= for auth_token <- @auth_tokens do %>
+      <tr>
+        <td><%= auth_token.token %></td>
+        <%= if (auth_token.revoked) do %>
+        <td>
+          <span class="tag is-danger">Revoked</span>
+        </td>
+        <td>
+          <div class="button" disabled>Revoke</div>
+        </td>
+        <% else  %>
+        <td>
+          <span class="tag is-success">Active</span>
+        </td>
+        <td><%= link "Revoke", to: Routes.auth_token_path(@conn, :delete, auth_token), method: :delete, data: [confirm: "Are you sure?"],  class: "button" %></td>
+        <% end%>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= pagination_links @auth_tokens %>
+  <%= button "Generate Token", to: Routes.auth_token_path(@conn, :new), class: "button is-link" %>
+
+</div>

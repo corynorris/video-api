@@ -1,6 +1,16 @@
 defmodule VideoApiWeb.InputHelpers do
   use Phoenix.HTML
 
+  def error_level(level) do
+    case level do
+      :error -> "is-danger"
+      :warning -> "is-warning"
+      :success -> "is-success"
+      :info -> "is-info"
+      _ -> "is-primary"
+    end
+  end
+
   def brand_link(conn, path) do
     current_path = Path.join(["/" | conn.path_info])
 

@@ -9,6 +9,19 @@ defmodule VideoApi.Videos do
   alias Ecto.Multi
   alias VideoApi.Videos.Video
 
+  def video_stats(user) do
+    # video count
+    count = Repo.one(from v in "videos", select: count(v.id), where: v.user_id == ^user.id)
+
+    # video length
+    # {:ok, count} = Repo.one(from v in "videos", select: count(v.id), where: v.user_id == ^user.id)
+
+    # published count
+    # count = Repo.one(from v in "videos", select: count(v.id), where: v.user_id == ^user.id and v.published==true)
+
+    %{count: count}
+  end
+
   @doc """
   Returns the list of videos.
 
@@ -18,8 +31,9 @@ defmodule VideoApi.Videos do
       [%Video{}, ...]
 
   """
-  def list_videos do
-    Repo.all(Video)
+  def list_videos(user, pagination) do
+    Ecto.assoc(user, :videos)
+    |> Repo.paginate(pagination)
   end
 
   @doc """
@@ -39,7 +53,7 @@ defmodule VideoApi.Videos do
   def get_video!(id), do: Repo.get!(Video, id)
 
   @doc """
-  Creates a video.
+  Transaction to save, persist file, and start encoding
 
   ## Examples
 
@@ -50,24 +64,28 @@ defmodule VideoApi.Videos do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_video(attrs \\ %{}) do
-    # Transaction to save, persist file, and start encoding
+  def create_video(user, attrs \\ %{}) do
+    user_video = Ecto.build_assoc(user, :videos)
+
     Multi.new()
-    |> Multi.insert(:video, Video.changeset(%Video{}, attrs))
+    |> Multi.insert(:video, Video.changeset(user_video, attrs))
     |> Multi.run(:persist_file, fn _repo, %{video: video} ->
       persist_file(video, attrs["video_file"])
     end)
-    |> Multi.run(:begin_transcodings, fn _repo, %{video: video} ->
-      job = Honeydew.async({:transcode, [video]}, :transcoding_jobs)
-
-      {:ok, "Job Started"}
-    end)
     |> Repo.transaction()
     |> case do
-      {:ok, %{video: video}} -> {:ok, video}
-      {:error, :video, changeset, _} -> {:error, changeset}
-      {:error, :persist_file, _, _} -> {:error, "couldn't create file"}
-      {:error, _, _, _} -> {:error, "Unknown error"}
+      {:ok, %{video: video}} ->
+        Honeydew.async({:transcode, [video]}, :transcoding_jobs)
+        {:ok, video}
+
+      {:error, :video, changeset, _} ->
+        {:error, changeset}
+
+      {:error, :persist_file, _, _} ->
+        {:error, "couldn't create file"}
+
+      {:error, _, _, _} ->
+        {:error, "Unknown error"}
     end
   end
 
@@ -97,6 +115,24 @@ defmodule VideoApi.Videos do
   def update_video(%Video{} = video, attrs) do
     video
     |> Video.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Updates a video.
+
+  ## Examples
+
+      iex> update_video(video, %{field: new_value})
+      {:ok, %Video{}}
+
+      iex> update_video(video, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_video_status(%Video{} = video, status) do
+    video
+    |> Video.update_status_changeset(%{status: status})
     |> Repo.update()
   end
 

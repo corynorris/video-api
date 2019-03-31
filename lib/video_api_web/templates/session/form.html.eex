@@ -6,7 +6,6 @@
 </div>
 <% end %>
 
-<%= IO.inspect(f) %>
 <%= input f, :email %>
 <%= input f, :password %>
 

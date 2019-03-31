@@ -8,9 +8,7 @@ defmodule VideoApi.Repo.Migrations.CreateVideos do
       add :filename, :string
       add :content_type, :string
       add :path, :string
-
       timestamps()
     end
-
   end
 end

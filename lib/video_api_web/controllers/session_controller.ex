@@ -16,9 +16,8 @@ defmodule VideoApiWeb.SessionController do
       {:ok, user} ->
         conn
         |> Guardian.Plug.sign_in(user)
-        |> assign(:current_user, user)
         |> put_flash(:info, "Logged in successfully.")
-        |> redirect(to: Routes.video_path(conn, :index))
+        |> redirect(to: Routes.dashboard_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         changeset = Map.put(changeset, :action, :insert)

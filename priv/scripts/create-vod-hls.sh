@@ -75,8 +75,8 @@ for rendition in "${renditions[@]}"; do
 done
 
 # start conversion
-echo -e "Executing command:\nffmpeg ${misc_params} -i ${source} ${cmd}"
-ffmpeg ${misc_params} -i ${source} ${cmd}
+# echo -e "Executing command:\nffmpeg ${misc_params} -i ${source} ${cmd}"
+ffmpeg ${misc_params} -i ${source} ${cmd} 2>&1
 
 # create master playlist file
 echo -e "${master_playlist}" > ${target}/playlist.m3u8
