@@ -13,6 +13,7 @@
     <ul class="menu-list">
       <li><%= active_link(@conn, "My Videos", Routes.video_path(@conn, :index)) %></li>
       <li><%= active_link(@conn, "Properties", Routes.property_path(@conn, :index)) %></li>
+      <li><%= active_link(@conn, "Publish", Routes.publish_path(@conn, :new)) %></li>
 
       <%# <li><%= active_link(@conn, "Transcoding Logs", "/transcodings") %>
     </ul>

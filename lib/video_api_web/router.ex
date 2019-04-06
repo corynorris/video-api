@@ -11,6 +11,11 @@ defmodule VideoApiWeb.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :api do
+    plug :accepts, ["json"]
+    plug :fetch_session
+  end
+
   pipeline :redirect_if_authed do
     plug Guardian.LoadSessionPipeline
     plug VideoApiWeb.Plugs.Redirector
@@ -39,7 +44,6 @@ defmodule VideoApiWeb.Router do
   end
 
   scope "/", VideoApiWeb do
-    get "/watch/:id", WatchController, :show
     pipe_through [:browser, :enforce_auth]
 
     get "/sign_out", SessionController, :delete
@@ -47,16 +51,25 @@ defmodule VideoApiWeb.Router do
     get "/dashboard", DashboardController, :index
     get "/documentation", DocumentationController, :index
 
+    get "/watch/:id", WatchController, :show
     resources "/videos", VideoController
     resources "/transcodings", TranscodingController, only: [:index, :show]
     resources "/properties", PropertyController
-    
-    get "/user/auth", AuthTokenController, :index
+
+    get("/publish", PublishController, :new)
+    post("/publish", PublishController, :create)
+
     post "/user/auth/generate", AuthTokenController, :new
     delete "/user/auth/:id", AuthTokenController, :delete
 
     get "/user/profile", UserController, :show
     get "/user/profile/edit", UserController, :edit
     put "/user/profile/edit", UserController, :update
+  end
+
+  scope "/api", VideoApiWeb do
+    pipe_through [:api, :enforce_auth]
+
+    get("/json", JsonController, :index)
   end
 end

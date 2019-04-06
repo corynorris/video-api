@@ -33,6 +33,11 @@ defmodule VideoApi.Videos do
     |> Repo.paginate(pagination)
   end
 
+  def list_videos(user) do
+    Ecto.assoc(user, :videos)
+    |> Repo.all()
+  end
+
   @doc """
   Gets a single video.
 

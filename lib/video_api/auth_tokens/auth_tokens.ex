@@ -8,6 +8,7 @@ defmodule VideoApi.AuthTokens do
   alias VideoApi.Repo
 
   alias VideoApi.AuthTokens.AuthToken
+  alias VideoApi.Properties.Property
 
   @doc """
   Gets a single auth_token.
@@ -24,7 +25,13 @@ defmodule VideoApi.AuthTokens do
 
   """
   def get_auth_token(user, auth_token_id) do
-    Repo.one(from v in AuthToken, where: v.user_id == ^user.id and v.id == ^auth_token_id)
+    query =
+      from a in AuthToken,
+        join: p in Property,
+        where: a.property_id == p.id,
+        where: a.id == ^auth_token_id and p.user_id == ^user.id
+
+    Repo.one(query)
   end
 
   @doc """
@@ -85,11 +92,8 @@ defmodule VideoApi.AuthTokens do
       {:error, %Ecto.Changeset{}}
 
   """
-  def revoke_auth_token(property, id) do
-    {id, ""} = Integer.parse(id)
-
-    property
-    |> Ecto.build_assoc(:auth_tokens, %{id: id})
+  def revoke_auth_token(auth_token) do
+    auth_token
     |> AuthToken.revoke_changeset()
     |> Repo.update()
   end

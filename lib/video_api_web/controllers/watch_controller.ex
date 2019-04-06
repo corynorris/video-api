@@ -5,7 +5,9 @@ defmodule VideoApiWeb.WatchController do
   import VideoApi.Utils
 
   def show(%{req_headers: headers} = conn, %{"id" => id}) do
-    video = Videos.get_video!(id)
+    user = Guardian.Plug.current_resource(conn)
+
+    video = Videos.get_video(user, id)
     send_video(conn, headers, video)
   end
 

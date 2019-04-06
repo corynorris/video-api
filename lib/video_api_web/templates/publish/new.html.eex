@@ -1,0 +1,28 @@
+<div class="column is-9">
+  <nav class="breadcrumb" aria-label="breadcrumbs">
+    <ul>
+      <li>
+        <a href="<%= Routes.dashboard_path(@conn, :index) %>" aria-current="page">Home</a>
+      </li>
+      <li>
+        <a href="<%= Routes.video_path(@conn, :index) %>">Videos</a>
+      </li>
+      <li class="is-active">
+        <a href="#" aria-current="page">Upload</a>
+      </li>
+    </ul>
+  </nav>
+  <h1 class="title">Publish</h1>
+  <%= if (get_flash(@conn, :error)) do %>
+  <article class="message is-danger">
+    <div class="message-body">
+    <%= get_flash(@conn, :error) %>
+    </div>
+  </article>
+  <% end %>
+  <form accept-charset="UTF-8" action="/publish" method="post">
+    <input name="_csrf_token" type="hidden" value="<%= Plug.CSRFProtection.get_csrf_token() %>">
+    <div id="video-select"></div>
+  </form>
+
+</div>

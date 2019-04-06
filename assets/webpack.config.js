@@ -8,7 +8,11 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = (env, options) => ({
   optimization: {
     minimizer: [
-      new UglifyJsPlugin({ cache: true, parallel: true, sourceMap: false }),
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: false
+      }),
       new OptimizeCSSAssetsPlugin({})
     ]
   },
@@ -20,8 +24,7 @@ module.exports = (env, options) => ({
     path: path.resolve(__dirname, '../priv/static/js')
   },
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
@@ -39,8 +42,12 @@ module.exports = (env, options) => ({
               ident: 'postcss',
               plugins: [
                 require('postcss-import')(),
-                require('autoprefixer')({ ...options }),
-                require('cssnano')({ ...options })
+                require('autoprefixer')({
+                  ...options
+                }),
+                require('cssnano')({
+                  ...options
+                })
               ]
             }
           }
@@ -49,7 +56,12 @@ module.exports = (env, options) => ({
     ]
   },
   plugins: [
-    new MiniCssExtractPlugin({ filename: '../css/app.css' }),
-    new CopyWebpackPlugin([{ from: 'static/', to: '../' }]),
+    new MiniCssExtractPlugin({
+      filename: '../css/app.css'
+    }),
+    new CopyWebpackPlugin([{
+      from: 'static/',
+      to: '../'
+    }]),
   ]
 });

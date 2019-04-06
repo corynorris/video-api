@@ -12,10 +12,10 @@
     <link href="https://vjs.zencdn.net/7.4.1/video-js.css" rel="stylesheet">
 
     <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
-    <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+    <%# <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script> %>
   </head>
 
-  <body>
+  <body data-js-file="<%=unique_view_name(@view_module, @view_template) %>">
     <%= render VideoApiWeb.SharedView, "main_nav.html", assigns %>
     <div class="container dashboard">
       <div class="columns">
@@ -24,8 +24,7 @@
       </div>
     </div>
     <%= render VideoApiWeb.SharedView, "footer.html", assigns %>
-    <script src='https://vjs.zencdn.net/7.4.1/video.js'></script>
-
+    <script src="<% Routes.static_path(@conn, "/js/app.js") %>"></script>
   </body>
 
 </html>

@@ -1,6 +1,7 @@
 defmodule VideoApiWeb.PropertyController do
   use VideoApiWeb, :controller
 
+  alias VideoApi.AuthTokens
   alias VideoApi.Properties
   alias VideoApi.Properties.Property
 
@@ -29,10 +30,11 @@ defmodule VideoApiWeb.PropertyController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
+  def show(conn, params = %{"id" => id}) do
     user = Guardian.Plug.current_resource(conn)
     property = Properties.get_property(user, id)
-    render(conn, "show.html", property: property)
+    auth_tokens = AuthTokens.list_auth_tokens(property, params)
+    render(conn, "show.html", property: property, auth_tokens: auth_tokens)
   end
 
   def edit(conn, %{"id" => id}) do

@@ -35,8 +35,6 @@
       <% end %>
     </tbody>
   </table>
+  <%= link "New Property", to: Routes.property_path(@conn, :new), class: "button is-link" %>
   <%= pagination_links @properties %>
-  <span>
-    <a class="button is-link" href="<%= Routes.property_path(@conn, :new) %>">New Property</a>
-  </span>
 </div>

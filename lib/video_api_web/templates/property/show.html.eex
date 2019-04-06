@@ -13,7 +13,6 @@
     </ul>
   </nav>
   <h1 class="title">Show Property</h1>
-
   <div class="content">
 
     <ul>
@@ -34,8 +33,41 @@
       </li>
 
     </ul>
-
     <%= link "Edit", to: Routes.property_path(@conn, :edit, @property), class: "button" %>
     <%= link "Back", to: Routes.property_path(@conn, :index), class: "button" %>
   </div>
+  <h1 class="title">Auth Tokens</h1>
+
+  <table class="table is-striped is-fullwidth is-bordered">
+    <thead>
+      <tr>
+        <th>Token</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= for auth_token <- @auth_tokens do %>
+      <tr>
+        <td><%= auth_token.token %></td>
+        <%= if (auth_token.revoked) do %>
+        <td>
+          <span class="tag is-danger">Revoked</span>
+        </td>
+        <td>
+          <div class="button is-small" disabled>Revoke</div>
+        </td>
+        <% else  %>
+        <td>
+          <span class="tag is-success">Active</span>
+        </td>
+        <td><%= button "Revoke", to: Routes.auth_token_path(@conn, :delete, auth_token), method: :delete, data: [confirm: "Are you sure?"],  class: "button is-small" %></td>
+        <% end%>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= button "Generate Token", to: Routes.auth_token_path(@conn, :new, property: @property), class: "button is-link" %>
+  <%= pagination_links @auth_tokens %>
+
 </div>

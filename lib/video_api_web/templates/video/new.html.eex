@@ -13,19 +13,6 @@
     </ul>
   </nav>
   <h1 class="title">New Video</h1>
-  <script>
-  var setFileName = function(fullPath, outputId) {
-    if (fullPath) {
-      var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
-      var filename = fullPath.substring(startIndex);
-      if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
-        filename = filename.substring(1);
-      }
-
-      document.getElementById(outputId).innerHTML = filename
-    }
-  }
-</script>
   <%= form_for @changeset, Routes.video_path(@conn, :create), [multipart: true], fn f -> %>
   <%= if @changeset.action do %>
   <div class="has-text-danger">
@@ -42,7 +29,7 @@
     <div class="control">
       <div class="file has-name is-fullwidth <%= state_class(f, :video_file) %>">
         <label class="file-label">
-          <%= file_input f, :video_file, required: true, class: "file-input", onchange: "setFileName(this.value, \"filename\")" %>
+          <%= file_input f, :video_file, required: true, class: "file-input", data_target_div: "file-name" %>
           <span class="file-cta">
             <span class="file-icon">
               <i class="fas fa-upload"></i>
@@ -51,7 +38,7 @@
               Choose a file…
             </span>
           </span>
-          <span class="file-name" id="filename"></span>
+          <span class="file-name" id="file-name"></span>
         </label>
       </div>
       <%=  VideoApiWeb.ErrorHelpers.error_tag(f, :video_file) %>

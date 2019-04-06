@@ -35,8 +35,7 @@
       <% end %>
     </tbody>
   </table>
+  <%= link "New Video", to: Routes.video_path(@conn, :new), class: "button is-link" %>
   <%= pagination_links @videos %>
-  <span>
-    <a class="button is-link" href="<%= Routes.video_path(@conn, :new) %>">New Video</a>
-  </span>
+
 </div>

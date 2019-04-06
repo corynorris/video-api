@@ -29,6 +29,11 @@ defmodule VideoApi.Properties do
     |> Repo.paginate(pagination)
   end
 
+  def list_properties(user) do
+    Ecto.assoc(user, :properties)
+    |> Repo.all()
+  end
+
   @doc """
   Gets a single property.
 

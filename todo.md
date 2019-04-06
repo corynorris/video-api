@@ -5,7 +5,7 @@
 - Let a user create & change an api key, require api key for external access [DONE]
 - Add sites [DONE]
 - Capture better errors from porcelain (maybe save a file) [DONE]
-- Allow auth_token management from sites view
+- Allow auth_token management from sites view [DONE]
 - Allow videos to be published against sites (if transcoded)
 - Load Site's auth_tokens and transcoded video details into memory and show videos against this
 - Allow tracking of view count
