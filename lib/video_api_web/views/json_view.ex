@@ -12,12 +12,12 @@ defmodule VideoApiWeb.JsonView do
   def render("video.json", %{video: video}) do
     video
     |> Map.from_struct()
-    |> Map.take([:id, :title])
+    |> Map.take([:id, :label, :description, :content_type, :status])
   end
 
   def render("property.json", %{property: property}) do
     property
     |> Map.from_struct()
-    |> Map.take([:id, :title])
+    |> Map.take([:id, :label, :description, :url])
   end
 end

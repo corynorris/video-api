@@ -23,8 +23,8 @@
 
       <%= for property <- @properties do %>
       <tr>
-        <td style="flex-grow: 3"><%= property.title %></td>
-        <td><%= property.title %></td>
+        <td style="flex-grow: 3"><%= property.label %></td>
+        <td><%= property.label %></td>
         <td><%= property.url %></td>
         <td>
           <%= link "Show", to: Routes.property_path(@conn, :show, property), class: "button is-small" %>

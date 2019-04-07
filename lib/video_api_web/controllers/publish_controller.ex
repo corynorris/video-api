@@ -3,9 +3,7 @@ defmodule VideoApiWeb.PublishController do
 
   alias VideoApi.Publish
 
-  @spec new(Plug.Conn.t(), any()) :: Plug.Conn.t()
   def new(conn, _params) do
-    user = Guardian.Plug.current_resource(conn)
     render(conn, "new.html")
   end
 
@@ -36,5 +34,14 @@ defmodule VideoApiWeb.PublishController do
     #   {:error, %Ecto.Changeset{} = changeset} ->
     #     render(conn, "new.html", changeset: changeset)
     # end
+  end
+
+  def create(conn, _params) do
+    conn
+    |> put_flash(
+      :error,
+      "Invalid selection, please make sure you have created a property and video"
+    )
+    |> render("new.html")
   end
 end

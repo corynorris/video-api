@@ -19,7 +19,7 @@
 
       <li>
         <strong>Title:</strong>
-        <%= @property.title %>
+        <%= @property.label %>
       </li>
 
       <li>

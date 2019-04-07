@@ -23,7 +23,7 @@
 
       <%= for video <- @videos do %>
       <tr>
-        <td style="flex-grow: 3"><%= video.title %></td>
+        <td style="flex-grow: 3"><%= video.label %></td>
         <td><%= video.content_type %></td>
         <td><%= video.status %></td>
         <td>

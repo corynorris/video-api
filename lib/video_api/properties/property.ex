@@ -3,7 +3,7 @@ defmodule VideoApi.Properties.Property do
   import Ecto.Changeset
 
   schema "properties" do
-    field :title, :string
+    field :label, :string
     field :description, :string
     field :url, :string
 
@@ -16,7 +16,8 @@ defmodule VideoApi.Properties.Property do
   @doc false
   def changeset(property, attrs) do
     property
-    |> cast(attrs, [:title, :url, :description])
-    |> validate_required([:title, :url, :description])
+    |> cast(attrs, [:label, :url, :description])
+    |> validate_required([:label, :url, :description])
+    |> unique_constraint(:unique_label, name: :unique_property_label)
   end
 end

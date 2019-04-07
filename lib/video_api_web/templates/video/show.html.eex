@@ -18,7 +18,7 @@
     <ul>
       <li>
         <strong>Title:</strong>
-        <%= @video.title %>
+        <%= @video.label %>
       </li>
 
       <li>

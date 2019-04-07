@@ -6,7 +6,7 @@
 </div>
 <% end %>
 
-<%= input f, :title %>
+<%= input f, :label %>
 
 <%= input f, :url %>
 

@@ -14,6 +14,6 @@ defmodule VideoApi.Publish.Published do
     |> cast(attrs, [:user_id, :property_id])
     |> foreign_key_constraint(:user_id)
     |> foreign_key_constraint(:property_id)
-    |> unique_constraint(:publication)
+    |> unique_constraint(:unique_publication, name: :unique_publication)
   end
 end

@@ -3,7 +3,7 @@ defmodule VideoApi.Repo.Migrations.CreateProperties do
 
   def change do
     create table(:properties) do
-      add :title, :string
+      add :label, :string
       add :url, :string
       add :description, :string
       add :user_id, references(:users, on_delete: :nothing)
@@ -11,6 +11,6 @@ defmodule VideoApi.Repo.Migrations.CreateProperties do
     end
 
     create index(:properties, [:user_id])
-    create(unique_index(:properties, [:title]))
+    create(unique_index(:properties, [:label, :user_id], name: :unique_property_label))
   end
 end

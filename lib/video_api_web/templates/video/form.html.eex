@@ -20,7 +20,7 @@
 </div>
 <% end %>
 
-<%= input f, :title %>
+<%= input f, :label %>
 <%= input f, :description %>
 
 <div class="field">

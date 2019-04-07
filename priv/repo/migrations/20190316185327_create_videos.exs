@@ -3,7 +3,7 @@ defmodule VideoApi.Repo.Migrations.CreateVideos do
 
   def change do
     create table(:videos) do
-      add :title, :string
+      add :label, :string
       add :description, :string
       add :filename, :string
       add :content_type, :string
