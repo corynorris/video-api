@@ -36,6 +36,23 @@
     <%= link "Edit", to: Routes.property_path(@conn, :edit, @property), class: "button" %>
     <%= link "Back", to: Routes.property_path(@conn, :index), class: "button" %>
   </div>
+
+  <h1 class="title">Published Videos</h1>
+<table class="table is-striped is-fullwidth is-bordered">
+    <thead>
+      <tr>
+        <th>label</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= for video <- @property.videos do %>
+      <tr>
+        <td><%= video.label %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
   <h1 class="title">Auth Tokens</h1>
 
   <table class="table is-striped is-fullwidth is-bordered">

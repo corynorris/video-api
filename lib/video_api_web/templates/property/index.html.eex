@@ -14,7 +14,6 @@
     <thead>
       <tr>
         <th>Title</th>
-        <th>url</th>
         <th>description</th>
         <th>Actions</th>
       </tr>
@@ -23,9 +22,12 @@
 
       <%= for property <- @properties do %>
       <tr>
+        <%= if (property.url) do %>
+        <td style="flex-grow: 3"><a href="<%= property.url %>"><%= property.label %><a></td>
+        <% else %>
         <td style="flex-grow: 3"><%= property.label %></td>
-        <td><%= property.label %></td>
-        <td><%= property.url %></td>
+        <% end %>
+        <td><%= property.description %></td>
         <td>
           <%= link "Show", to: Routes.property_path(@conn, :show, property), class: "button is-small" %>
           <%= link "Edit", to: Routes.property_path(@conn, :edit, property), class: "button is-small" %>

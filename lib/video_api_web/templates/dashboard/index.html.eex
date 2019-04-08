@@ -27,7 +27,7 @@
       </div>
       <div class="tile is-parent">
         <article class="tile is-child box">
-          <p class="title"><%= @video_stats.published %></p>
+          <p class="title"><%= @published.count %></p>
           <p class="subtitle">Published</p>
         </article>
       </div>
@@ -45,44 +45,40 @@
       </div>
     </div>
   </section>
-  <div class="columns">
-    <div class="column is-12">
-      <div class="card events-card">
-        <header class="card-header">
-          <p class="card-header-title"> Transcodings </p>
-        </header>
-        <div class="card-table">
-          <div class="content">
-            <table class="table is-fullwidth is-striped">
-              <tbody>
-                <%= if (@events.total_entries == 0) do %>
-                <tr>
-                  <td width="5%">
-                    <i class="fa fa-bell-o"></i>
-                  </td>
-                  <td>No new events to display, try <%= active_link(@conn, "creating your first video!", Routes.video_path(@conn, :new)) %></td>
-                </tr>
-                <% end %>
-                <%= for event <- @events do %>
-                <tr>
-                  <td width="5%">
-                    <i class="fa fa-bell-o"></i>
-                  </td>
-                  <td><%= event.message %></td>
-                  <td>
-                    <a class="button is-small <%= error_level(event.level) %>" href="#"><%= event.level %></a>
-                  </td>
-                </tr>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
+    <div class="card events-card">
+      <header class="card-header">
+        <p class="card-header-title"> Transcodings </p>
+      </header>
+      <div class="card-table">
+        <div class="content">
+          <table class="table is-fullwidth is-striped">
+            <tbody>
+              <%= if (@events.total_entries == 0) do %>
+              <tr>
+                <td width="5%">
+                  <i class="fa fa-bell-o"></i>
+                </td>
+                <td>No new events to display, try <%= active_link(@conn, "creating your first video!", Routes.video_path(@conn, :new)) %></td>
+              </tr>
+              <% end %>
+              <%= for event <- @events do %>
+              <tr>
+                <td width="5%">
+                  <i class="fa fa-bell-o"></i>
+                </td>
+                <td><%= event.message %></td>
+                <td>
+                  <a class="button is-small <%= error_level(event.level) %>" href="#"><%= event.level %></a>
+                </td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
         </div>
-        <footer class="card-footer">
-          <div href="#" class="card-footer-item"> <%= pagination_links @events %>
-          </div>
-        </footer>
       </div>
-    </div>
+      <footer class="card-footer">
+        <div href="#" class="card-footer-item"> <%= pagination_links @events %>
+        </div>
+      </footer>
   </div>
 </div>

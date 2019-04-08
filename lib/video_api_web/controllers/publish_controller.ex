@@ -2,14 +2,13 @@ defmodule VideoApiWeb.PublishController do
   use VideoApiWeb, :controller
 
   alias VideoApi.Publish
+  alias VideoApi.Properties
 
   def new(conn, _params) do
     render(conn, "new.html")
   end
 
   def create(conn, %{"property" => property_id, "videos" => video_ids}) do
-    user = Guardian.Plug.current_resource(conn)
-
     case {property_id, video_ids} do
       {"", _video_ids} ->
         conn
@@ -22,18 +21,14 @@ defmodule VideoApiWeb.PublishController do
         |> render("new.html")
 
       _other ->
+        user = Guardian.Plug.current_resource(conn)
+        property = Properties.get_property(user, property_id)
+        IO.inspect(property)
+        video_ids = String.split(video_ids, ",")
+
+        Publish.publish_videos_to_property(user, property, video_ids)
         redirect(conn, to: Routes.property_path(conn, :show, property_id))
     end
-
-    # case Properties.create_property(user, property_params) do
-    #   {:ok, property} ->
-    #     conn
-    #     |> put_flash(:info, "Publish created successfully.")
-    #     |> redirect(to: Routes.property_path(conn, :show, property))
-
-    #   {:error, %Ecto.Changeset{} = changeset} ->
-    #     render(conn, "new.html", changeset: changeset)
-    # end
   end
 
   def create(conn, _params) do

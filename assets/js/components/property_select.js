@@ -15,7 +15,7 @@ export default class PropertySelect extends Component {
             name="property"
             options={this.props.properties.map(item => ({
               id: item.id,
-              label: item.title
+              label: item.label
             }))}
           />
         </div>

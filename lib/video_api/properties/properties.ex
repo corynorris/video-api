@@ -50,6 +50,7 @@ defmodule VideoApi.Properties do
   """
   def get_property(user, property_id) do
     Repo.one(from v in Property, where: v.user_id == ^user.id and v.id == ^property_id)
+    |> Repo.preload(:videos)
   end
 
   @doc """

@@ -22,7 +22,9 @@ export default class VideoSelect extends Component {
     const selectedIdString = selectedIds.join(",");
 
     const { videos } = this.props;
-    const items = videos.map(item => ({ id: item.id, label: item.title }));
+    const items = videos
+      .filter(item => item.status == "complete")
+      .map(item => ({ id: item.id, label: item.label }));
 
     return (
       <div className="field">

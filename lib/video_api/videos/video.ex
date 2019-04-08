@@ -17,6 +17,14 @@ defmodule VideoApi.Videos.Video do
     field :status, StatusEnum, default: 0
     belongs_to(:user, VideoApi.Accounts.User)
     has_many(:transcoding_logs, VideoApi.Transcodings.TranscodingLog)
+
+    many_to_many(
+      :properties,
+      VideoApi.Properties.Property,
+      join_through: "published",
+      on_replace: :delete
+    )
+
     timestamps()
   end
 
@@ -28,13 +36,14 @@ defmodule VideoApi.Videos.Video do
     |> foreign_key_constraint(:user_id)
     |> validate_video_content_type(@valid_mimes)
     |> put_video_file_contents()
-    |> unique_constraint(:unique_label, name: :unique_video_label)
+    |> unique_constraint(:label, name: :unique_video_label)
   end
 
   def update_changeset(video, attrs) do
     video
     |> cast(attrs, @optional_update_fields)
     |> foreign_key_constraint(:user_id)
+    |> unique_constraint(:label, name: :unique_video_label)
   end
 
   def update_status_changeset(video, attrs) do
