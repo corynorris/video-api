@@ -13,7 +13,7 @@ class PublishPage extends Component {
   }
 
   componentDidMount() {
-    fetch("/api/json")
+    fetch("/videos/json")
       .then(response => response.json())
       .then(data => {
         this.setState({

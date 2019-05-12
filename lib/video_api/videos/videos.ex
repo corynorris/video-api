@@ -8,7 +8,6 @@ defmodule VideoApi.Videos do
   alias VideoApi.Utils
   alias Ecto.Multi
   alias VideoApi.Videos.Video
-  alias VideoApi.AuthTokens.AuthToken
 
   def video_stats(user) do
     # video count
@@ -37,24 +36,6 @@ defmodule VideoApi.Videos do
   def list_videos(user) do
     Ecto.assoc(user, :videos)
     |> Repo.all()
-  end
-
-  @doc """
-  Lists auth tokens
-
-  ## Examples
-    iex> list_auth_tokens(property)
-    [%AuthToken{}, ...]
-  """
-  def list_videos_from_auth_token(auth_token, pagination) do
-    query =
-      from a in AuthToken,
-        join: p in Property,
-        join: v in Video,
-        where: a.property_id == p.id,
-        where: a.token == ^auth_token and a.revoked == false
-
-    Repo.all(query)
   end
 
   @doc """

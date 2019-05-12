@@ -1,4 +1,8 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 <div class="column is-9">
+
   <nav class="breadcrumb" aria-label="breadcrumbs">
     <ul>
       <li>
@@ -12,41 +16,74 @@
   <div class="content">
     <h3 class="title is-3">Documentation</h3>
     <div class="box">
-      <h4 id="const" class="title is-3">Customize Player</h4>
-      <article class="message is-primary">
-        <span class="icon has-text-primary">
-          <i class="fab fa-js"></i>
-        </span>
-        <div class="message-body">
-          https://codepen.io/heff/pen/EarCt
-        </div>
-      </article>
-      <pre><code class="language-javascript">const test = 'test';</code></pre>
-    </div>
-    <div class="box">
-      <h4 id="let" class="title is-3">let</h4>
+      <h4 class="title is-3">VideoJS Player</h4>
       <article class="message is-primary">
         <span class="icon has-text-primary">
           <i class="fas fa-info-circle"></i>
         </span>
         <div class="message-body">
-          Block-scoped. Can be re-assigned.
+          Adding video to your site is easy, simply copy the html5 code to load found below and use one of the api calls
+          to get your video after publishing:
         </div>
       </article>
-      <pre><code class="language-javascript">let i = 0;</code></pre>
+      <pre><code class="html">&lt;head&gt;
+  &lt;link href=&quot;https://vjs.zencdn.net/7.5.4/video-js.css&quot; rel=&quot;stylesheet&quot;&gt;
+
+  &lt;!-- If you'd like to support IE8 (for Video.js versions prior to v7) --&gt;
+  &lt;script src=&quot;https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+  &lt;video id='my-video' class='video-js' controls preload='auto' width='640' height='264'
+  poster='MY_VIDEO_POSTER.jpg' data-setup='{}'&gt;
+    &lt;source src='MY_VIDEO.mp4' type='video/mp4'&gt;
+    &lt;source src='MY_VIDEO.webm' type='video/webm'&gt;
+    &lt;p class='vjs-no-js'&gt;
+      To view this video please enable JavaScript, and consider upgrading to a web browser that
+      &lt;a href='https://videojs.com/html5-video-support/' target='_blank'&gt;supports HTML5 video&lt;/a&gt;
+    &lt;/p&gt;
+  &lt;/video&gt;
+
+  &lt;script src='https://vjs.zencdn.net/7.5.4/video.js'&gt;&lt;/script&gt;
+&lt;/body&gt;</code></pre>
     </div>
-    <h3 class="title is-3">More to Come...</h3>
     <div class="box">
-      <h4 id="lorem" class="title is-4">More to come...</h4>
+      <h4 class="title is-3">List All Videos</h4>
       <article class="message is-primary">
         <span class="icon has-text-primary">
           <i class="fas fa-info-circle"></i>
         </span>
         <div class="message-body">
-          Lorem ipsum dolor sit amet, mea ne viderer veritus menandri, id scaevola gloriatur instructior sit.
+          List all videos by passing in your own API Key after publishing something with the following endpoint:
         </div>
       </article>
-      <pre><code class="language-javascript">let i = 0;</code></pre>
+      <pre><code class="html"><%=VideoApiWeb.Endpoint.url()%>/api/videos?api_key=demo</code></pre>
+    </div>
+    <div class="box">
+      <h4 class="title is-3">Get a Specific Video</h4>
+      <article class="message is-primary">
+        <span class="icon has-text-primary">
+          <i class="fas fa-info-circle"></i>
+        </span>
+        <div class="message-body">
+          List details about a specific video by passing in your own API Key after publishing something with the
+          following endpoint:
+        </div>
+      </article>
+      <pre><code class="html"><%=VideoApiWeb.Endpoint.url()%>/api/videos/1?api_key=demo</code></pre>
+    </div>
+    <div class="box">
+      <h4 class="title is-3">Get the Property</h4>
+      <article class="message is-primary">
+        <span class="icon has-text-primary">
+          <i class="fas fa-info-circle"></i>
+        </span>
+        <div class="message-body">
+          List details about a property by passing in your own API Key after publishing something with the
+          following endpoint:
+        </div>
+      </article>
+      <pre><code class="html"><%=VideoApiWeb.Endpoint.url()%>/api/property?api_key=demo</code></pre>
     </div>
   </div>
 </div>

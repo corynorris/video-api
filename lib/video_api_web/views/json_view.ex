@@ -9,6 +9,12 @@ defmodule VideoApiWeb.JsonView do
     }
   end
 
+  def render("videos.json", %{videos: videos}) do
+    %{
+      videos: render_many(videos, JsonView, "video.json", as: :video)
+    }
+  end
+
   def render("video.json", %{video: video}) do
     video
     |> Map.from_struct()

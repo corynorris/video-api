@@ -15,9 +15,9 @@ defmodule VideoApi.Json do
   """
   def list_videos(auth_token) do
     query =
-      from auth in AuthToken,
+      from vid in Video,
         join: pub in Published,
-        join: vid in Video,
+        join: auth in AuthToken,
         where: auth.property_id == pub.property_id,
         where: pub.video_id == vid.id,
         where: auth.token == ^auth_token and auth.revoked == false
@@ -28,14 +28,14 @@ defmodule VideoApi.Json do
   @doc """
   Lists all properties for a given auth token
   """
-  def list_properties(auth_token) do
+  def get_property(auth_token) do
     query =
-      from auth in AuthToken,
-        join: prop in Property,
+      from prop in Property,
+        join: auth in AuthToken,
         where: auth.property_id == prop.id,
         where: auth.token == ^auth_token and auth.revoked == false
 
-    Repo.all(query)
+    Repo.one(query)
   end
 
   @doc """
@@ -43,9 +43,9 @@ defmodule VideoApi.Json do
   """
   def get_video(auth_token, video_id) do
     query =
-      from auth in AuthToken,
+      from vid in Video,
         join: pub in Published,
-        join: vid in Video,
+        join: auth in AuthToken,
         where: auth.property_id == pub.property_id,
         where: pub.video_id == vid.id and vid.id == ^video_id,
         where: auth.token == ^auth_token and auth.revoked == false
