@@ -8,6 +8,7 @@ defmodule VideoApi.Videos do
   alias VideoApi.Utils
   alias Ecto.Multi
   alias VideoApi.Videos.Video
+  alias VideoApi.AuthTokens.AuthToken
 
   def video_stats(user) do
     # video count
@@ -39,6 +40,24 @@ defmodule VideoApi.Videos do
   end
 
   @doc """
+  Lists auth tokens
+
+  ## Examples
+    iex> list_auth_tokens(property)
+    [%AuthToken{}, ...]
+  """
+  def list_videos_from_auth_token(auth_token, pagination) do
+    query =
+      from a in AuthToken,
+        join: p in Property,
+        join: v in Video,
+        where: a.property_id == p.id,
+        where: a.token == ^auth_token and a.revoked == false
+
+    Repo.all(query)
+  end
+
+  @doc """
   Gets a single video.
 
   Raises `Ecto.NoResultsError` if the Video does not exist.
@@ -54,6 +73,31 @@ defmodule VideoApi.Videos do
   """
   def get_video(user, video_id) do
     Repo.one(from v in Video, where: v.user_id == ^user.id and v.id == ^video_id)
+  end
+
+  @doc """
+  Gets a video for a demo.
+
+  Raises `Ecto.NoResultsError` if the Video does not exist.
+
+  ## Examples
+
+      iex> get_demo!()
+      %Video{}
+
+      iex> get_demo!()
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_demo() do
+    query =
+      from v in Video,
+        join: p in VideoApi.Publish.Published,
+        where: v.id == p.video_id,
+        order_by: [desc: v.id],
+        limit: 1
+
+    Repo.one(query)
   end
 
   @doc """

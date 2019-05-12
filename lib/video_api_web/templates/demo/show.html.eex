@@ -1,0 +1,53 @@
+<div class="column is-9">
+  <nav class="breadcrumb" aria-label="breadcrumbs">
+    <ul>
+      <li>
+        <a href="<%= Routes.dashboard_path(@conn, :index) %>" aria-current="page">Home</a>
+      </li>
+      <li class="is-active">
+        <a href="#" aria-current="page">Demo</a>
+      </li>
+    </ul>
+  </nav>
+  <h1 class="title">Demo Video</h1>
+  <link href="https://vjs.zencdn.net/7.5.4/video-js.css" rel="stylesheet">
+
+  <div class="content">
+    <ul>
+      <li>
+        <strong>Title:</strong>
+        <%= @video.label %>
+      </li>
+
+      <li>
+        <strong>Description:</strong>
+        <%= @video.description %>
+      </li>
+
+      <li>
+        <strong>Filename:</strong>
+        <%= @video.filename %>
+      </li>
+
+      <li>
+        <strong>Content type:</strong>
+        <%= @video.content_type %>
+      </li>
+
+      <li>
+        <strong>Path:</strong>
+        <%= @video.path %>
+      </li>
+
+    </ul>
+
+    <video id="my-video" class="video-js" controls preload="none" width="640" height="264" data-setup="{}">
+      <source src="http://www.example.com/waterfall-video.mp4" type="application/x-mpegURL">
+      <p class="vjs-no-js">
+        To view this video please enable JavaScript, and consider upgrading to a web browser that
+        <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+      </p>
+    </video>
+
+  </div>
+</div>

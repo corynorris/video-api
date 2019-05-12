@@ -2,7 +2,7 @@ defmodule VideoApi.AuthTokens do
   @moduledoc """
   The AuthTokens context.
   """
-  @length 64
+  @length 30
 
   import Ecto.Query, warn: false
   alias VideoApi.Repo
@@ -32,6 +32,20 @@ defmodule VideoApi.AuthTokens do
         where: a.id == ^auth_token_id and p.user_id == ^user.id
 
     Repo.one(query)
+  end
+
+  @doc """
+  Lists auth tokens
+
+  ## Examples
+    iex> list_auth_tokens(property)
+    [%AuthToken{}, ...]
+  """
+  def list_auth_tokens(property, pagination) do
+    property
+    |> Ecto.assoc(:auth_tokens)
+    |> Ecto.Query.order_by(desc: :revoked_at)
+    |> Repo.paginate(pagination)
   end
 
   @doc """

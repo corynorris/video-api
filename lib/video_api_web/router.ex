@@ -28,14 +28,14 @@ defmodule VideoApiWeb.Router do
   end
 
   scope "/", VideoApiWeb do
-    pipe_through [:browser]
+    get("/demo", DemoController, :show)
+    get("/stream/:api_key/:id/1080p.m3u8", StreamController, :show)
   end
 
   scope "/", VideoApiWeb do
     pipe_through [:browser, :redirect_if_authed]
 
     get "/", PageController, :index
-
     get "/sign_in", SessionController, :new
     post "/sign_in", SessionController, :create
 
@@ -55,6 +55,7 @@ defmodule VideoApiWeb.Router do
     resources "/videos", VideoController
     resources "/transcodings", TranscodingController, only: [:index, :show]
     resources "/properties", PropertyController
+    get("/videos/json", JsonController, :index)
 
     get("/publish", PublishController, :new)
     post("/publish", PublishController, :create)
@@ -69,7 +70,5 @@ defmodule VideoApiWeb.Router do
 
   scope "/api", VideoApiWeb do
     pipe_through [:api, :enforce_auth]
-
-    get("/json", JsonController, :index)
   end
 end

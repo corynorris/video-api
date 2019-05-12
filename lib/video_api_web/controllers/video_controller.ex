@@ -3,6 +3,7 @@ defmodule VideoApiWeb.VideoController do
 
   alias VideoApi.Videos
   alias VideoApi.Videos.Video
+  alias VideoApi.Properties
 
   def index(conn, params) do
     user = Guardian.Plug.current_resource(conn)
@@ -72,5 +73,12 @@ defmodule VideoApiWeb.VideoController do
     conn
     |> put_flash(:info, "Video deleted successfully.")
     |> redirect(to: Routes.video_path(conn, :index))
+  end
+
+  def json(conn, _params) do
+    user = Guardian.Plug.current_resource(conn)
+    videos = Videos.list_videos(user)
+    properties = Properties.list_properties(user)
+    render(conn, "index.json", %{videos: videos, properties: properties})
   end
 end
