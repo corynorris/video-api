@@ -13,36 +13,10 @@
   <link href="https://vjs.zencdn.net/7.5.4/video-js.css" rel="stylesheet">
 
   <div class="content">
-    <ul>
-      <li>
-        <strong>Title:</strong>
-        <%= @video.label %>
-      </li>
-
-      <li>
-        <strong>Description:</strong>
-        <%= @video.description %>
-      </li>
-
-      <li>
-        <strong>Filename:</strong>
-        <%= @video.filename %>
-      </li>
-
-      <li>
-        <strong>Content type:</strong>
-        <%= @video.content_type %>
-      </li>
-
-      <li>
-        <strong>Path:</strong>
-        <%= @video.path %>
-      </li>
-
-    </ul>
 
     <video id="my-video" class="video-js" controls preload="none" width="640" height="264" data-setup="{}">
-      <source src="http://www.example.com/waterfall-video.mp4" type="application/x-mpegURL">
+      <source src="<%= Routes.stream_path(@conn, :show, "f80cf85f-5111-47f5-9d4d-c3cb27ec343f", "1080p.m3u8") %>"
+        type="application/x-mpegURL">
       <p class="vjs-no-js">
         To view this video please enable JavaScript, and consider upgrading to a web browser that
         <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>

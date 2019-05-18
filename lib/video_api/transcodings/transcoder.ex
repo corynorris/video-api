@@ -10,7 +10,7 @@ defmodule VideoApi.Transcoder do
     Transcodings.log("Starting transcode for #{video.label}", video, :info)
 
     source_path = Utils.build_video_path(video)
-    output_path = Utils.build_transcode_path(video)
+    output_path = Utils.build_transcode_path(video.path)
     output_path |> Path.dirname() |> File.mkdir_p()
 
     "bash #{File.cwd!()}/priv/scripts/create-vod-hls.sh #{source_path} #{output_path}"

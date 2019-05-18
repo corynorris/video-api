@@ -1,34 +1,31 @@
 defmodule VideoApiWeb.StreamController do
   use VideoApiWeb, :controller
-  alias VideoApi.Videos
 
   import VideoApi.Utils
 
-  def show(%{req_headers: headers} = conn, %{"id" => id}) do
-    video = Videos.get_demo()
-    IO.inspect(video)
-    send_video(conn, headers, video)
+  @allowed_extensions ~w(m3u8 ts)
+  @allowed_files ~r/(1080p|360p|720p|480p)(_[0-9]+)*/
+
+  def show(conn, %{"guid" => guid, "filename" => filename}) do
+    [quality, ext] = String.split(filename, ".")
+
+    with true <- Regex.match?(@allowed_files, quality),
+         true <- Enum.member?(@allowed_extensions, ext) do
+      send_video(conn, guid, filename)
+    else
+      _ -> send_resp(conn, 403, "Not allowed")
+    end
   end
 
-  def send_video(conn, headers, video) do
-    video_path =
-      video
-      |> build_transcode_path()
-      |> Kernel.<>("/1080p.m3u8")
+  def send_video(conn, guid, filename) do
+    video_path = build_transcode_path(guid) |> Path.join(filename)
+    size = get_file_size(video_path)
 
     conn
-    |> Plug.Conn.put_resp_header("content-type", "application/vnd.apple.mpegurl")
-    |> Plug.Conn.send_file(206, video_path)
-  end
-
-  def get_offset(headers) do
-    case List.keyfind(headers, "range", 0) do
-      {"range", "bytes=" <> start_pos} ->
-        String.split(start_pos, "-") |> hd |> String.to_integer()
-
-      nil ->
-        0
-    end
+    |> Plug.Conn.put_resp_header("content-type", "video/mp2t")
+    |> put_resp_header("Accept-Ranges", "bytes")
+    |> put_resp_header("Content-Length", "#{size}")
+    |> Plug.Conn.send_file(200, video_path)
   end
 
   def get_file_size(path) do

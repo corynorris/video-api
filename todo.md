@@ -14,8 +14,7 @@
 - JSON API should show only published videos [DONE]
 - JSON API should have url for individual videos [DONE]
 - Fix publication since JSON endpoint was changed [DONE]
-- Create endpoint to play videos after transcoding
-- JSON API should include link to play video
+- Create endpoint to play videos after transcoding [DONE]
 
 ## UI
 
@@ -25,9 +24,12 @@
 
 ## Backlog
 
-- Allow thumbnails
+- Test with real video
 - Allow tracking of view count
-- Load AUTH_TOKEN into memory to speed up playback
-- Show cards instead of ugly list
+- Allow tracking of video progress
+- Allow generation of thumbnails
+- Show cards instead of ugly list in video index view
 - Include logs in show video view
-- ADD Demo in config to disable signups and create dummy user that can't upload but has seed data
+- Create a branch that can be used for prod that disallows sign-up
+- Create a branch that can be used for demos with very small upload size (or disallowed uploads)
+- Load published videos into memory and give them an identifier so file system isn't accessed directly via guid (vidoes that aren't yet published are vulnerable to brute force)

@@ -1,5 +1,6 @@
 defmodule VideoApiWeb.JsonView do
   use VideoApiWeb, :view
+  import VideoApi.Utils
   alias VideoApiWeb.JsonView
 
   def render("index.json", %{properties: properties, videos: videos}) do
@@ -19,6 +20,7 @@ defmodule VideoApiWeb.JsonView do
     video
     |> Map.from_struct()
     |> Map.take([:id, :label, :description, :content_type, :status])
+    |> Map.put(:url, build_video_url(video))
   end
 
   def render("property.json", %{property: property}) do

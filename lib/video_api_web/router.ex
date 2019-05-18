@@ -29,7 +29,6 @@ defmodule VideoApiWeb.Router do
 
   scope "/", VideoApiWeb do
     get("/demo", DemoController, :show)
-    get("/stream/:api_key/:id/1080p.m3u8", StreamController, :show)
   end
 
   scope "/", VideoApiWeb do
@@ -73,5 +72,9 @@ defmodule VideoApiWeb.Router do
     get "/videos", JsonController, :list_videos
     get "/videos/:video_id", JsonController, :get_video
     get "/property", JsonController, :get_property
+  end
+
+  scope "/stream", VideoApiWeb do
+    get("/:guid/:filename", StreamController, :show)
   end
 end
