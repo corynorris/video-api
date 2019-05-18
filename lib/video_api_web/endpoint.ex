@@ -30,7 +30,7 @@ defmodule VideoApiWeb.Endpoint do
     parsers: [:urlencoded, :multipart, :json],
     pass: ["video/mp4"],
     json_decoder: Phoenix.json_library(),
-    length: 400_000_000
+    length: Application.get_env(:video_api, :max_upload_size)
 
   plug Plug.MethodOverride
   plug Plug.Head
