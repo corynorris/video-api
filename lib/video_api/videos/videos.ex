@@ -178,7 +178,28 @@ defmodule VideoApi.Videos do
 
   """
   def delete_video(%Video{} = video) do
-    Repo.delete(video)
+    Multi.new()
+    |> Multi.delete(:video, video)
+    |> Multi.run(:delete_video, fn _repo, data ->
+      IO.inspect(data)
+      {:ok, delete_file(video)}
+    end)
+    |> Repo.transaction()
+  end
+
+  defp delete_file(video) do
+    video_path = Utils.build_video_path(video)
+    transcode_path = Utils.build_transcode_path(video.path)
+
+    IO.inspect(transcode_path)
+
+    if File.exists?(video_path) do
+      File.rm(video_path)
+    end
+
+    if File.exists?(transcode_path) do
+      File.rm_rf(transcode_path)
+    end
   end
 
   @doc """

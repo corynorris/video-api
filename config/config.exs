@@ -8,7 +8,8 @@
 use Mix.Config
 
 config :video_api,
-  ecto_repos: [VideoApi.Repo]
+  ecto_repos: [VideoApi.Repo],
+  max_upload_size: System.get_env("MAX_UPLOAD_SIZE") || 400_000_000
 
 # Configures the endpoint
 config :video_api, VideoApiWeb.Endpoint,
