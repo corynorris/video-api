@@ -28,10 +28,6 @@ defmodule VideoApiWeb.Router do
   end
 
   scope "/", VideoApiWeb do
-    get("/demo", DemoController, :show)
-  end
-
-  scope "/", VideoApiWeb do
     pipe_through [:browser, :redirect_if_authed]
 
     get "/", PageController, :index

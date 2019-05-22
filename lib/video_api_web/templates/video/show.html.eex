@@ -41,6 +41,11 @@
         <%= @video.path %>
       </li>
 
+      <li>
+        <strong>Stream Link</strong>
+        <%= VideoApi.Utils.build_video_url(@video) %>
+      </li>
+
     </ul>
 
     <video id="my-video" class="video-js" controls preload="none" width="640" height="264" data-setup="{}">
