@@ -49,7 +49,8 @@ defmodule VideoApi.MixProject do
       {:porcelain, "~> 2.0"},
       {:ecto_enum, "~> 1.2"},
       {:scrivener_ecto, "~> 2.0"},
-      {:scrivener_html, "~> 1.8"}
+      {:scrivener_html, "~> 1.8"},
+      {:cors_plug, "~> 2.0"}
     ]
   end
 

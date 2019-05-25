@@ -41,6 +41,11 @@ config :scrivener_html,
   routes_helper: VideoApi.Router.Helpers,
   view_style: :bulma
 
+config :cors_plug,
+  origin: ["http://localhost", "https://www.codelixir.com"],
+  max_age: 86400,
+  methods: ["GET", "POST"]
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
