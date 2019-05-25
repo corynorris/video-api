@@ -12,8 +12,13 @@ defmodule VideoApiWeb.Router do
   end
 
   pipeline :api do
+    plug CORSPlug
     plug :accepts, ["json"]
     plug :fetch_session
+  end
+
+  pipeline :stream do
+    plug CORSPlug
   end
 
   pipeline :redirect_if_authed do
@@ -71,6 +76,7 @@ defmodule VideoApiWeb.Router do
   end
 
   scope "/stream", VideoApiWeb do
+    pipe_through [:stream]
     get("/:guid/:filename", StreamController, :show)
   end
 end
