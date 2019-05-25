@@ -12,13 +12,12 @@ defmodule VideoApiWeb.Router do
   end
 
   pipeline :api do
-    plug CORSPlug
     plug :accepts, ["json"]
     plug :fetch_session
   end
 
-  pipeline :stream do
-    plug CORSPlug
+  pipeline :cors do
+    plug CORSPlug, origin: ["http://localhost:4000", "https://www.codelixir.com"]
   end
 
   pipeline :redirect_if_authed do
@@ -69,14 +68,18 @@ defmodule VideoApiWeb.Router do
   end
 
   scope "/api", VideoApiWeb do
-    pipe_through [:api]
+    pipe_through [:api, :cors]
     get "/videos", JsonController, :list_videos
+    options "/videos", JsonController, :options
     get "/videos/:video_id", JsonController, :get_video
+    options "/videos/:video_id", JsonController, :options
     get "/property", JsonController, :get_property
+    options "/property", JsonController, :options
   end
 
   scope "/stream", VideoApiWeb do
-    pipe_through [:stream]
+    pipe_through [:cors]
     get("/:guid/:filename", StreamController, :show)
+    options "/:guid/:filename", StreamController, :options
   end
 end
