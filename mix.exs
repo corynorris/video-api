@@ -5,7 +5,7 @@ defmodule VideoApi.MixProject do
     [
       app: :video_api,
       version: "0.1.0",
-      elixir: "~> 1.5",
+      elixir: "~> 1.10.2",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
@@ -33,22 +33,22 @@ defmodule VideoApi.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.4.1"},
+      {:phoenix, "~> 1.4"},
       {:phoenix_pubsub, "~> 1.1"},
-      {:phoenix_ecto, "~> 4.0"},
-      {:ecto_sql, "~> 3.0"},
+      {:phoenix_ecto, "~> 4.1"},
+      {:ecto_sql, "~> 3.3"},
       {:postgrex, ">= 0.0.0"},
-      {:phoenix_html, "~> 2.11"},
+      {:phoenix_html, "~> 2.14"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:gettext, "~> 0.11"},
-      {:jason, "~> 1.0"},
+      {:gettext, "~> 0.17.4"},
+      {:jason, "~> 1.1"},
       {:plug_cowboy, "~> 2.0"},
-      {:guardian, "~> 1.2.1"},
-      {:bcrypt_elixir, "~> 2.0.1"},
+      {:guardian, "~> 2.0"},
+      {:bcrypt_elixir, "~> 2.2"},
       {:honeydew, "~> 1.3"},
       {:porcelain, "~> 2.0"},
-      {:ecto_enum, "~> 1.2"},
-      {:scrivener_ecto, "~> 2.0"},
+      {:ecto_enum, "~> 1.4"},
+      {:scrivener_ecto, "~> 2.3"},
       {:scrivener_html, "~> 1.8"},
       {:cors_plug, "~> 2.0"}
     ]

@@ -69,7 +69,7 @@ config :phoenix, :plug_init_mode, :runtime
 # Configure your database
 config :video_api, VideoApi.Repo,
   username: "postgres",
-  password: "postgres",
+  password: "password",
   database: "video_api_dev",
-  hostname: "localhost",
+  hostname: "172.17.0.3",
   pool_size: 10
