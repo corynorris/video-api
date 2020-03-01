@@ -6,30 +6,30 @@
     "watch": "webpack --mode development --watch"
   },
   "dependencies": {
-    "@kenshooui/react-multi-select": "^1.0.71",
-    "bulma": "^0.7.4",
+    "@kenshooui/react-multi-select": "^1.1.6",
+    "bulma": "^0.8.0",
     "phoenix": "file:../deps/phoenix",
     "phoenix_html": "file:../deps/phoenix_html",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "video.js": "^7.5.4"
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "video.js": "^7.6.6"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.3",
-    "@babel/preset-env": "^7.4.3",
-    "@babel/preset-react": "^7.0.0",
-    "autoprefixer": "^9.5.1",
-    "babel-loader": "^8.0.5",
-    "copy-webpack-plugin": "^4.5.0",
-    "css-loader": "^2.1.1",
+    "@babel/core": "^7.8.6",
+    "@babel/preset-env": "^7.8.6",
+    "@babel/preset-react": "^7.8.3",
+    "autoprefixer": "^9.7.4",
+    "babel-loader": "^8.0.6",
+    "copy-webpack-plugin": "^5.1.1",
+    "css-loader": "^3.4.2",
     "cssnano": "^4.1.10",
-    "mini-css-extract-plugin": "^0.4.0",
-    "optimize-css-assets-webpack-plugin": "^5.0.1",
-    "postcss-cli": "^6.1.2",
+    "mini-css-extract-plugin": "^0.9.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "postcss-cli": "^7.1.0",
     "postcss-import": "^12.0.1",
     "postcss-loader": "^3.0.0",
-    "uglifyjs-webpack-plugin": "^1.2.4",
-    "webpack": "4.4.0",
-    "webpack-cli": "3.3.0"
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "4.41.6",
+    "webpack-cli": "3.3.11"
   }
 }
