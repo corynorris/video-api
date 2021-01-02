@@ -20,7 +20,9 @@
     <div class="container dashboard">
       <div class="columns">
         <%= render VideoApiWeb.SharedView, "side_nav.html", assigns %>
-        <%= render @view_module, @view_template, assigns %>
+
+        <%= @inner_content %>
+
       </div>
     </div>
     <%= render VideoApiWeb.SharedView, "footer.html", assigns %>

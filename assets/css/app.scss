@@ -1,6 +1,11 @@
 /* This file is for your main application css. */
 
-@import 'bulma/css/bulma.css';
+@import "../node_modules/bulma/sass/utilities/_all.sass";
+@import "../node_modules/bulma/sass/base/_all.sass";
+@import "../node_modules/bulma/sass/form/_all.sass";
+@import "../node_modules/bulma/sass/components/_all.sass";
+@import "../node_modules/bulma/sass/elements/_all.sass";
+@import "../node_modules/bulma/sass/grid/_all.sass";
 
 html,
 body {
@@ -152,6 +157,9 @@ nav.navbar {
   color: #8F99A3;
 }
 
+.hero.welcome {
+  padding: 2rem 1rem;
+}
 .hero.welcome.is-info {
   background: #36D1DC;
   background: -webkit-linear-gradient(to right, #5B86E5, #36D1DC);
@@ -179,7 +187,3 @@ nav.navbar {
   margin-bottom: 0;
 }
 
-/* .events-card .card-table {
-  max-height: 250px;
-  overflow-y: scroll;
-} */

@@ -13,7 +13,9 @@
 
   <body>
     <%= render VideoApiWeb.SharedView, "main_nav.html", assigns %>
-    <%= render @view_module, @view_template, assigns %>
+
+    <%= @inner_content %>
+
     <%= render VideoApiWeb.SharedView, "footer.html", assigns %>
 
   </body>

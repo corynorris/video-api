@@ -9,7 +9,7 @@
       </li>
     </ul>
   </nav>
-  <section class="hero is-info welcome is-small">
+  <section class="hero is-info welcome ">
     <div class="hero-body">
       <div class="container">
         <h1 class="title"> Hello, <%= @current_user.first_name %>. </h1>
@@ -18,7 +18,7 @@
     </div>
   </section>
   <section class="info-tiles">
-    <div class="tile is-ancestor has-text-centered">
+    <div class="tile is-ancestor">
       <div class="tile is-parent">
         <article class="tile is-child box">
           <p class="title"><%= @video_stats.count %></p>

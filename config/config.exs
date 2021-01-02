@@ -16,8 +16,8 @@ config :video_api, VideoApiWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "HkeaNOfvcDYUKrHYipxHRhoVa7DcK/DwWPSU2sClFMoj143EFs6PZm9DzTO2SWRY",
   render_errors: [view: VideoApiWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: VideoApi.PubSub, adapter: Phoenix.PubSub.PG2]
-
+  pubsub_server: MyApp.PubSub
+  
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

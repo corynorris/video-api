@@ -71,5 +71,5 @@ config :video_api, VideoApi.Repo,
   username: "postgres",
   password: "password",
   database: "video_api_dev",
-  hostname: "172.17.0.3",
+  hostname: "localhost",
   pool_size: 10

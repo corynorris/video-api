@@ -8,6 +8,7 @@ defmodule VideoApi.Application do
   def start(_type, _args) do
     # List all child processes to be supervised
     children = [
+      {Phoenix.PubSub, name: MyApp.PubSub},
       # Start the Ecto repository
       VideoApi.Repo,
       # Start the endpoint when the application starts
