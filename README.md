@@ -1,20 +1,13 @@
-# VideoApi
+# Trello
 
-To start your Phoenix server:
+## Overview
+A real-time video encoding application, that lets you upload and transcode videos into different qualities, and stream them to external applications via api
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Install Node.js dependencies with `cd assets && npm install`
-  * Start Phoenix endpoint with `mix phx.server`
+## Demo
+Demo Account: test@123.com  
+Demo Password: password
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+https://lit-hollows-33285.herokuapp.com/
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
-
-## Learn more
-
-  * Official website: http://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+## Other Notes
+This project was bootstrapped with [Phoenix](https://www.phoenixframework.org/).
