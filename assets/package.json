@@ -2,16 +2,16 @@
   "repository": {},
   "license": "MIT",
   "scripts": {
-    "deploy": "webpack --mode production",
-    "watch": "webpack --mode development --watch"
+    "deploy": "NODE_OPTIONS=--openssl-legacy-provider webpack --mode production",
+    "watch": "NODE_OPTIONS=--openssl-legacy-provider webpack --mode development --watch"
   },
   "dependencies": {
     "@babel/plugin-proposal-decorators": "^7.12.12",
     "@babel/preset-react": "^7.12.10",
     "@kenshooui/react-multi-select": "^1.1.6",
     "bulma": "^0.8.0",
-    "phoenix": "file:../deps/phoenix",
-    "phoenix_html": "file:../deps/phoenix_html",
+    "phoenix": "^1.5.13",
+    "phoenix_html": "^3.0.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "video.js": "^7.6.6"
@@ -25,8 +25,8 @@
     "hard-source-webpack-plugin": "^0.13.1",
     "lodash": "^4.17.20",
     "mini-css-extract-plugin": "^0.9.0",
-    "node-sass": "^4.13.1",
-    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "sass": "^1.77.0",
+
     "sass-loader": "^8.0.2",
     "terser-webpack-plugin": "^2.3.2",
     "uglifyjs-webpack-plugin": "^2.0.0",
