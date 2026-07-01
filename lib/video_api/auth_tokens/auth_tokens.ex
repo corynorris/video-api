@@ -49,20 +49,6 @@ defmodule VideoApi.AuthTokens do
   end
 
   @doc """
-  Lists auth tokens
-
-  ## Examples
-    iex> list_auth_tokens(property)
-    [%AuthToken{}, ...]
-  """
-  def list_auth_tokens(property, pagination) do
-    property
-    |> Ecto.assoc(:auth_tokens)
-    |> Ecto.Query.order_by(desc: :revoked_at)
-    |> Repo.paginate(pagination)
-  end
-
-  @doc """
   Generates an auth token
 
   ## Examples
