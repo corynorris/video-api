@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import MultiSelect from "@kenshooui/react-multi-select";
 import "@kenshooui/react-multi-select/dist/style.css";
 
@@ -8,13 +9,13 @@ export default class VideoSelect extends Component {
     this.updateSelectedItems = this.updateSelectedItems.bind(this);
     this.state = {
       selectedItems: [],
-      selectedIds: []
+      selectedIds: [],
     };
   }
 
   updateSelectedItems(selectedItems) {
     this.setState({ selectedItems });
-    this.setState({ selectedIds: selectedItems.map(item => item.id) });
+    this.setState({ selectedIds: selectedItems.map((item) => item.id) });
   }
 
   render() {
@@ -23,8 +24,8 @@ export default class VideoSelect extends Component {
 
     const { videos } = this.props;
     const items = videos
-      .filter(item => item.status == "complete")
-      .map(item => ({ id: item.id, label: item.label }));
+      .filter((item) => item.status == "complete")
+      .map((item) => ({ id: item.id, label: item.label }));
 
     return (
       <div className="field">
@@ -44,3 +45,14 @@ export default class VideoSelect extends Component {
     );
   }
 }
+
+VideoSelect.propTypes = {
+  label: PropTypes.string.isRequired,
+  videos: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      label: PropTypes.string.isRequired,
+      status: PropTypes.string,
+    }),
+  ).isRequired,
+};

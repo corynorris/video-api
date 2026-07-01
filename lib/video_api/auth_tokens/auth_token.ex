@@ -6,7 +6,7 @@ defmodule VideoApi.AuthTokens.AuthToken do
     field :token, :string
     field :revoked, :boolean, default: false
     field :revoked_at, :utc_datetime
-    belongs_to(:property, VideoApi.Accounts.User)
+    belongs_to(:property, VideoApi.Properties.Property)
 
     timestamps()
   end

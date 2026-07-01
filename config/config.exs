@@ -14,7 +14,7 @@ config :video_api,
 # Configures the endpoint
 config :video_api, VideoApiWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "HkeaNOfvcDYUKrHYipxHRhoVa7DcK/DwWPSU2sClFMoj143EFs6PZm9DzTO2SWRY",
+  secret_key_base: System.get_env("SECRET_KEY_BASE"),
   render_errors: [view: VideoApiWeb.ErrorView, accepts: ~w(html json)],
   pubsub_server: MyApp.PubSub
   
@@ -29,11 +29,11 @@ config :phoenix, :json_library, Jason
 # Guardian
 config :video_api, VideoApiWeb.Guardian,
   issuer: "video_api",
-  secret_key: "wnYhbR4deb7deWcKQJjMzTKmi9SEznozGD0Rddz6JfIctlLBv6cnPV/reM4/J81F"
+  secret_key: System.get_env("SECRET_KEY")
 
 config :video_api,
-  uploads_dir: "/home/cory/Downloads/tmp/",
-  transcodes_dir: "/home/cory/Downloads/tmp/transcodes"
+  uploads_dir: System.get_env("UPLOADS_DIR"),
+  transcodes_dir: System.get_env("TRANSCODES_DIR")
 
 config :porcelain, driver: Porcelain.Driver.Basic
 
