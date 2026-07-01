@@ -8,17 +8,17 @@ class PublishPage extends Component {
     super(props);
     this.state = {
       videos: [],
-      properties: []
+      properties: [],
     };
   }
 
   componentDidMount() {
     fetch("/videos/json")
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         this.setState({
           videos: data.videos,
-          properties: data.properties
+          properties: data.properties,
         });
       });
   }
@@ -40,6 +40,6 @@ class PublishPage extends Component {
   }
 }
 
-export default function() {
+export default function () {
   ReactDOM.render(<PublishPage />, document.getElementById("video-select"));
 }
