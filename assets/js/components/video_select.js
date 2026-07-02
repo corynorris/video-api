@@ -4,55 +4,55 @@ import MultiSelect from "@kenshooui/react-multi-select";
 import "@kenshooui/react-multi-select/dist/style.css";
 
 export default class VideoSelect extends Component {
-  constructor(props) {
-    super(props);
-    this.updateSelectedItems = this.updateSelectedItems.bind(this);
-    this.state = {
-      selectedItems: [],
-      selectedIds: [],
-    };
-  }
+	constructor(props) {
+		super(props);
+		this.updateSelectedItems = this.updateSelectedItems.bind(this);
+		this.state = {
+			selectedItems: [],
+			selectedIds: [],
+		};
+	}
 
-  updateSelectedItems(selectedItems) {
-    this.setState({ selectedItems });
-    this.setState({ selectedIds: selectedItems.map((item) => item.id) });
-  }
+	updateSelectedItems(selectedItems) {
+		this.setState({ selectedItems });
+		this.setState({ selectedIds: selectedItems.map((item) => item.id) });
+	}
 
-  render() {
-    const { selectedItems, selectedIds } = this.state;
-    const selectedIdString = selectedIds.join(",");
+	render() {
+		const { selectedItems, selectedIds } = this.state;
+		const selectedIdString = selectedIds.join(",");
 
-    const { videos } = this.props;
-    const items = videos
-      .filter((item) => item.status == "complete")
-      .map((item) => ({ id: item.id, label: item.label }));
+		const { videos } = this.props;
+		const items = videos
+			.filter((item) => item.status == "complete")
+			.map((item) => ({ id: item.id, label: item.label }));
 
-    return (
-      <div className="field">
-        <label className="label">{this.props.label}</label>
-        <MultiSelect
-          items={items}
-          selectedItems={selectedItems}
-          onChange={this.updateSelectedItems}
-        />
-        <input
-          name="videos"
-          className="input"
-          type="hidden"
-          value={selectedIdString}
-        />
-      </div>
-    );
-  }
+		return (
+			<div className="field">
+				<label className="label">{this.props.label}</label>
+				<MultiSelect
+					items={items}
+					selectedItems={selectedItems}
+					onChange={this.updateSelectedItems}
+				/>
+				<input
+					name="videos"
+					className="input"
+					type="hidden"
+					value={selectedIdString}
+				/>
+			</div>
+		);
+	}
 }
 
 VideoSelect.propTypes = {
-  label: PropTypes.string.isRequired,
-  videos: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-      label: PropTypes.string.isRequired,
-      status: PropTypes.string,
-    }),
-  ).isRequired,
+	label: PropTypes.string.isRequired,
+	videos: PropTypes.arrayOf(
+		PropTypes.shape({
+			id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+			label: PropTypes.string.isRequired,
+			status: PropTypes.string,
+		}),
+	).isRequired,
 };

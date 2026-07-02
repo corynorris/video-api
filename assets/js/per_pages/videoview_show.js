@@ -1,3 +1,3 @@
 export default function () {
-  require("video.js");
+	require("video.js");
 }

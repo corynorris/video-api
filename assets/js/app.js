@@ -19,10 +19,10 @@ import common from "./common";
 // Local files can be imported directly using relative paths, for example:
 // import socket from "./socket"
 document.addEventListener(
-  "DOMContentLoaded",
-  () => {
-    common();
-    script_per_page();
-  },
-  false,
+	"DOMContentLoaded",
+	() => {
+		common();
+		script_per_page();
+	},
+	false,
 );
