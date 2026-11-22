@@ -1,3 +1,0 @@
-NODE_OPTIONS=--openssl-legacy-provider pnpm run deploy
-cd $phoenix_dir
-mix "${phoenix_ex}.digest"
