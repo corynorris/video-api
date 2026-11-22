@@ -21,6 +21,7 @@ defmodule VideoApiWeb.ConnCase do
     quote do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
+      @endpoint VideoApiWeb.Endpoint
       alias VideoApiWeb.Router.Helpers, as: Routes
 
       import VideoApiWeb.ConnCase
