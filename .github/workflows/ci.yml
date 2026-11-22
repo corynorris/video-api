@@ -34,36 +34,34 @@ jobs:
 
   elixir:
     name: Elixir (compile, test)
-    # ecto 3.3 predates the built-in `dynamic/0` type, so it needs an Elixir
-    # without it (< 1.12); stay on 22.04 where setup-beam has prebuilt OTP 23.
-    runs-on: ubuntu-22.04
+    # The app pins ecto 3.3, which cannot compile on Elixir >= 1.12 (it defines
+    # a `dynamic/0` type that later became a built-in), and setup-beam no
+    # longer ships OTP 23 builds. Use the era-correct hexpm image instead and
+    # run Postgres inside it so the hard-coded localhost test config works.
+    runs-on: ubuntu-latest
+    container: hexpm/elixir:1.11.4-erlang-23.3.4.18-debian-bullseye-20210902-slim
     env:
       MIX_ENV: test
-    services:
-      postgres:
-        image: postgres:16
-        env:
-          POSTGRES_PASSWORD: postgres
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
     steps:
+      - name: Install build tools and Postgres
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends build-essential ca-certificates git postgresql postgresql-contrib
       - uses: actions/checkout@v4
-      - uses: erlef/setup-beam@v1
-        with:
-          otp-version: "23.3"
-          elixir-version: "1.11"
       - uses: actions/cache@v4
         with:
           path: |
             deps
             _build
-          key: mix-${{ runner.os }}-${{ hashFiles('mix.lock') }}
-      - run: mix local.hex --force && mix local.rebar --force
-      - run: mix deps.get
-      - run: mix compile
-      - run: mix test
+          key: mix-${{ hashFiles('mix.lock') }}
+      - name: Compile
+        run: |
+          mix local.hex --force
+          mix local.rebar --force
+          mix deps.get
+          mix compile
+      - name: Test
+        run: |
+          service postgresql start
+          su postgres -c "psql -c \"ALTER USER postgres PASSWORD 'postgres';\""
+          mix test
