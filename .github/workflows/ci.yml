@@ -39,7 +39,7 @@ jobs:
     # longer ships OTP 23 builds. Use the era-correct hexpm image instead and
     # run Postgres inside it so the hard-coded localhost test config works.
     runs-on: ubuntu-latest
-    container: hexpm/elixir:1.11.4-erlang-23.3.4.18-debian-bullseye-20210902-slim
+    container: hexpm/elixir:1.11.4-erlang-23.3.4.18-debian-bullseye-20260610-slim
     env:
       MIX_ENV: test
     steps:
