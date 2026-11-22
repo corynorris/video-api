@@ -54,6 +54,14 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     steps:
+      - name: Install build tools
+        # bullseye is EOL: point apt at the archive so the index is available,
+        # and skip valid-until checks for the expired Release files.
+        run: |
+          sed -i 's|deb.debian.org|archive.debian.org|g' /etc/apt/sources.list
+          echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/99no-check-valid-until
+          apt-get update
+          apt-get install -y --no-install-recommends build-essential ca-certificates
       - uses: actions/checkout@v4
       - uses: actions/cache@v4
         with:
