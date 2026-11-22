@@ -35,18 +35,25 @@ jobs:
   elixir:
     name: Elixir (compile, test)
     # The app pins ecto 3.3, which cannot compile on Elixir >= 1.12 (it defines
-    # a `dynamic/0` type that later became a built-in), and setup-beam no
-    # longer ships OTP 23 builds. Use the era-correct hexpm image instead and
-    # run Postgres inside it so the hard-coded localhost test config works.
+    # a `dynamic/0` type that later became a built-in) and setup-beam no longer
+    # ships OTP 23 builds, so run in the era-correct hexpm image. Postgres runs
+    # as a service; config/test.exs reads POSTGRES_HOST for the connection.
     runs-on: ubuntu-latest
     container: hexpm/elixir:1.11.4-erlang-23.3.4.18-debian-bullseye-20260610-slim
     env:
       MIX_ENV: test
+      POSTGRES_HOST: postgres
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
-      - name: Install build tools and Postgres
-        run: |
-          apt-get update
-          apt-get install -y --no-install-recommends build-essential ca-certificates git postgresql postgresql-contrib
       - uses: actions/checkout@v4
       - uses: actions/cache@v4
         with:
@@ -61,7 +68,4 @@ jobs:
           mix deps.get
           mix compile
       - name: Test
-        run: |
-          service postgresql start
-          su postgres -c "psql -c \"ALTER USER postgres PASSWORD 'postgres';\""
-          mix test
+        run: mix test
