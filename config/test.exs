@@ -11,8 +11,8 @@ config :logger, level: :warn
 
 # Configure your database
 config :video_api, VideoApi.Repo,
-  username: System.get_env("POSTGRES_USER") || "postgres",
-  password: System.get_env("POSTGRES_PASSWORD") || "postgres",
+  username: "postgres",
+  password: "postgres",
   database: "video_api_test",
-  hostname: System.get_env("POSTGRES_HOST") || "localhost",
+  hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
