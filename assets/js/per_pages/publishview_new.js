@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import VideoSelect from "../components/video_select";
 import PropertySelect from "../components/property_select";
 
@@ -41,5 +41,5 @@ class PublishPage extends Component {
 }
 
 export default function () {
-	ReactDOM.render(<PublishPage />, document.getElementById("video-select"));
+	createRoot(document.getElementById("video-select")).render(<PublishPage />);
 }
