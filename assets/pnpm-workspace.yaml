@@ -7,6 +7,9 @@ allowBuilds:
 # Security overrides (pnpm audit --fix); remove as upstreams pick up patches.
 overrides:
   '@babel/runtime@<7.26.10': '>=7.29.7'
+  # react-event-listener (via @kenshooui/react-multi-select) pins the 2017
+  # Babel beta; semver ranges above exclude prereleases, so name it exactly.
+  '@babel/runtime@7.0.0-beta.42': '>=7.29.7'
   baseline-browser-mapping@>=2.0.0 <2.11.0: '>=2.11.0'
   brace-expansion@<2: '>=1.1.21'
   brace-expansion@>=2 <4: '>=2.1.7'
