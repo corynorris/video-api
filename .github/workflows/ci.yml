@@ -34,7 +34,9 @@ jobs:
 
   elixir:
     name: Elixir (compile, test)
-    runs-on: ubuntu-latest
+    # ecto 3.3 predates the built-in `dynamic/0` type, so it needs an Elixir
+    # without it (< 1.12); stay on 22.04 where setup-beam has prebuilt OTP 23.
+    runs-on: ubuntu-22.04
     env:
       MIX_ENV: test
     services:
@@ -53,8 +55,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: erlef/setup-beam@v1
         with:
-          otp-version: "26"
-          elixir-version: "1.15"
+          otp-version: "23.3"
+          elixir-version: "1.11"
       - uses: actions/cache@v4
         with:
           path: |
