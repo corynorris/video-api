@@ -39,7 +39,7 @@ jobs:
     # ships OTP 23 builds, so run in the era-correct hexpm image. Postgres runs
     # as a service; config/test.exs reads POSTGRES_HOST for the connection.
     runs-on: ubuntu-latest
-    container: hexpm/elixir:1.11.4-erlang-23.3.4.18-debian-bullseye-20260610-slim
+    container: hexpm/elixir:1.11.4-erlang-23.3.4.18-debian-bullseye-20260610
     env:
       MIX_ENV: test
       POSTGRES_HOST: postgres
